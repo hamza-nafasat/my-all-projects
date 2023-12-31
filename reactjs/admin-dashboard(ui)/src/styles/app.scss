@@ -1,0 +1,70 @@
+@import "./mixin.scss";
+@import "dashboard.scss";
+@import "loader.scss";
+
+:root {
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
+}
+// UNIVERSAL CSS
+// =============
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+// COLORS CLASESE
+// ==============
+.red {
+	color: red;
+}
+.blue {
+	color: rgb(47, 0, 255);
+}
+
+.green {
+	color: rgb(0, 195, 0);
+}
+
+// NORMAL CLASSES
+// ==============
+.adminContainer {
+	@include grid(1fr 4fr, 2rem);
+	height: 100vh;
+	background-color: whitesmoke;
+	> aside {
+		width: 100%;
+		background-color: white;
+		padding: 1rem;
+		z-index: 10;
+		overflow-y: auto;
+		@include customScrollbar(none);
+		> section {
+			margin: 1rem;
+			> h5 {
+				@include heading(2px);
+				opacity: 0.8;
+				margin: 0.5rem 0rem;
+			}
+			> ul {
+				@include flex(column, unset, unset, 0.5rem);
+				> li {
+					border-radius: 10px;
+					padding: 0.5rem 1rem;
+					> a {
+						@include flex(row, unset);
+					}
+				}
+			}
+		}
+	}
+}

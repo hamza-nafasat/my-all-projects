@@ -1,0 +1,65 @@
+@mixin heading($spacing: 3px, $weight: 300, $case: uppercase) {
+	letter-spacing: $spacing;
+	font-weight: $weight;
+	text-transform: $case;
+}
+
+@mixin flex($dir: row, $justify: center, $align: center, $gap: 1rem) {
+	display: flex;
+	flex-direction: $dir;
+	justify-content: $justify;
+	align-items: $align;
+	gap: $gap;
+}
+
+@mixin grid($col: 1fr, $gap: 1rem, $row: unset) {
+	display: grid;
+	gap: $gap;
+	grid-template-columns: $col;
+	grid-template-rows: $row;
+}
+
+@mixin inputStyle($width: 100%, $pading: 1rem, $bgColor: inherit, $border: none) {
+	width: $width;
+	padding: $pading;
+	border: $border;
+	outline: none;
+	background-color: $bgColor;
+}
+
+@mixin posCenter {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+@mixin square($size: 1rem) {
+	height: $size;
+	width: $size;
+}
+
+@mixin customScrollbar(
+	$d: block,
+	$w: 12px,
+	$h: 12px,
+	$color: #3498db,
+	$bg: #ecf0f5,
+	$hover: #2980b9
+) {
+	&::-webkit-scrollbar {
+		display: $d;
+		width: $w;
+		height: $h;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: $color;
+		border-radius: 6px;
+	}
+	&::-webkit-scrollbar-track {
+		background-color: $bg;
+	}
+	&::-webkit-scrollbar-thumb:hover {
+		background-color: $hover;
+	}
+}

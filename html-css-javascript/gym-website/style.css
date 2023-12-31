@@ -1,0 +1,104 @@
+ /* css reset */
+ * {
+    margin: 0;
+    padding: 0;
+    color:white;
+    font-family: Arial;
+  }
+  body {
+    /* background-color: black; */
+    background-image: url(pxfuel.jpg);
+  }
+
+  .left {
+    position: absolute;
+    left: 50px;
+    top: 8px;
+    /* border: 2px solid red; */
+    display: inline-block;
+  }
+  .left img {
+    width: 136px;
+  }
+  .left div {
+    text-align: center;
+    line-height: 0%;
+  }
+
+  .mid {
+    display: block;
+    width: 41%;
+    margin: 34px auto;
+    /* border: 2px solid green; */
+  }
+
+  .right {
+    position: absolute;
+    right: 34px;
+    top:32px;
+    display: inline-block;
+    /* border: 2px solid blue; */
+  }
+
+  .navbar li {
+    display: inline-block;
+    font-size: 22px;
+  }
+  .navbar li a {
+    text-decoration: none;
+    padding: 11px;
+  }
+  .navbar li a:hover,
+  .navbar li a:active {
+    color:green;
+   
+  }
+  .btn {
+    font-family: Arial;
+    background-color:#0b0b26;
+    padding: 4px 15px;
+    border: 2px solid gray;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background-color: green;
+    color:rgb(255, 255, 255);
+  }
+  .container {
+    border-radius: 28px;
+    /* border: 2px solid purple; */
+    margin: 62px 12px;
+    padding: 56px 21px;
+    width: 39%;
+    text-align: center;
+  }
+  .form-group input {
+    text-align: center;
+    font-size:15px;
+    display: block;
+    width: 340px;
+    border: 2px solid transparent;
+    margin: 11px auto;
+    padding: 2px;
+    border-radius: 11px;
+    font-family: arial;
+  }
+  .container button {
+    background-color: #0b0b26;
+    width: 350px;
+    font-size: 25px
+  }
+  .container button:hover{
+    background-color: green;
+    color: white;
+  }
+  .inputa{
+    color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .inputa:hover{
+    background-color: green;
+    color: white;
+  }

@@ -1,0 +1,40 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+/* box1  */
+.outer-box1 {
+  /* display: flex; */
+  margin: 16px 60px;
+  border-radius: 14px;
+  color: white;
+  background-color: #03a9a9;
+  height: 140px;
+}
+.inner-box1 {
+  background-color: rgb(174, 223, 223);
+  height: 80px;
+  width: 80px;
+  padding: 10px;
+  border-radius: 6px;
+  margin: 18px 10px;
+  float: left;
+}
+p {
+  font-size: 16px;
+  display: inline-block;
+  padding: 27px 0px;
+  color: black;
+
+  width: 90%;
+}
+#inner2 {
+  float: right;
+}
+#inner3 {
+  float: left;
+}
+#inner4 {
+  float: right;
+}
