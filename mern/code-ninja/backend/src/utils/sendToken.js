@@ -3,10 +3,11 @@ const sendToken = (res, user, message = "", statusCode = 200) => {
 	const options = {
 		maxAge: 15 * 24 * 60 * 60 * 1000,
 		httpOnly: true,
-		secure: true,
+		secure: process.env.NODE_ENV === "production",
 		sameSite: "none",
 	};
-	res.status(statusCode).cookie("token", token, options).json({
+	res.cookie("token", token, options);
+	res.status(statusCode).json({
 		success: true,
 		message,
 		user,

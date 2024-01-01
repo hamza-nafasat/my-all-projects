@@ -1,29 +1,4 @@
 import { useEffect } from "react";
-// import {
-// 	Header,
-// 	Footer,
-// 	NotFound,
-// 	Dashboard,
-// 	CreateCourse,
-// 	AdminCourses,
-// 	Users,
-// 	Home,
-// 	Contact,
-// 	About,
-// 	Courses,
-// 	CoursePage,
-// 	Request,
-// 	ForgetPassword,
-// 	ResetPassword,
-// 	PaymentFail,
-// 	PaymentSuccess,
-// 	Subscribe,
-// 	Login,
-// 	Signup,
-// 	Profile,
-// 	ChangePassword,
-// 	UpdateProfile,
-// } from "./components";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Home from "./components/home/Home";

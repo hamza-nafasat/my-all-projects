@@ -5,7 +5,7 @@ const Footer = () => {
 	return (
 		<footer className="bg-gray-900 text-white py-8">
 			<div className="container mx-auto flex flex-wrap justify-between">
-				<div className="w-full md:w-1/2 lg:w-1/4 mb-6">
+				<div className="w-full md:w-1/2 lg:w-1/4 mb-6 px-5">
 					<h2 className="text-3xl font-bold text-blue-400 mb-3">Quick Links</h2>
 					<ul className="list-none p-0">
 						<li className="mb-2">
@@ -40,7 +40,7 @@ const Footer = () => {
 					</ul>
 				</div>
 
-				<div className="w-full md:w-1/2 lg:w-1/4 mb-6">
+				<div className="w-full md:w-1/2 lg:w-1/4 mb-6 px-5">
 					<h2 className="text-3xl font-bold text-blue-400 mb-3">Social Media</h2>
 					<ul className="list-none p-0">
 						<li className="mb-2">
@@ -66,7 +66,7 @@ const Footer = () => {
 					</ul>
 				</div>
 
-				<div className="w-full md:w-1/2 lg:w-1/4 mb-6">
+				<div className="w-full md:w-1/2 lg:w-1/4 mb-6 px-5">
 					<h2 className="text-3xl font-bold text-blue-400 mb-3">About Us</h2>
 					<p className="mb-3 text-gray-400">
 						We provide information about our society to make you feel comfortable. We

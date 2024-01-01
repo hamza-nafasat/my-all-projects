@@ -25,10 +25,8 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
-	// process.env.FRONTEND_URL
 	cors({
-		origin: [process.env.FRONTEND_URL, process.env.FRONTEND_URL_TWO],
-		methods: ["GET", "POST", "PUT", "DELETE"],
+		origin: process.env.FRONTEND_URL,
 		credentials: true,
 	})
 );
@@ -43,7 +41,7 @@ app.use(API_PREFIX_V1, paymentRoutes);
 app.get("/", (req, res) =>
 	res.send(
 		`<h2>
-			Site is working. Click <a href=${process.env.FRONTEND_URL}>here</a> to check the application.
+			Site is working <a href=${process.env.FRONTEND_URL}>here</a>.
 		</h2>`
 	)
 );

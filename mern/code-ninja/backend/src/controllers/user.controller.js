@@ -54,7 +54,8 @@ export const login = asyncHandler(async (req, res, next) => {
 export const forgetPassword = asyncHandler(async (req, res, next) => {
 	const { email } = req.body;
 	const user = await User.findOne({ email });
-	if (!user) return next(new CustomError("User not found. Please check your email address.", 404));
+	if (!user)
+		return next(new CustomError("User not found. Please check your email address.", 404));
 	////
 	const resetToken = await user.getResetToken();
 	await user.save();
@@ -79,7 +80,10 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
 	const { token } = req.params;
 	const resetPasswordToken = crypto.createHash("sha256").update(token).digest("hex");
 	////
-	const user = await User.findOne({ resetPasswordToken, resetPasswordExpire: { $gt: Date.now() } });
+	const user = await User.findOne({
+		resetPasswordToken,
+		resetPasswordExpire: { $gt: Date.now() },
+	});
 	if (!user) return next(new CustomError("Invalid or expired token. Please try again.", 404));
 	////
 	const { password } = req.body;
@@ -102,18 +106,18 @@ export const resetPassword = asyncHandler(async (req, res, next) => {
 
 //  LOGOUT
 export const logout = asyncHandler(async (req, res, next) => {
-	res.status(200)
-		.cookie("token", null, {
-			// expires: new Date(0),
-			maxAge: 0,
-			httpOnly: true,
-			secure: true,
-			sameSite: "none",
-		})
-		.json({
-			success: true,
-			message: "Logged out Successfully",
-		});
+	const options = {
+		expires: new Date(0),
+		httpOnly: true,
+		secure: process.env.NODE_ENV === "production",
+		sameSite: "none",
+		path: "/",
+	};
+	res.clearCookie("token", options);
+	res.status(200).json({
+		success: true,
+		message: "Logged out Successfully",
+	});
 });
 
 //  MY PROFILE
@@ -224,7 +228,8 @@ export const addToPlayList = asyncHandler(async (req, res, next) => {
 	const isCourseAlreadyExist = user.playlist.find((item) => {
 		return item.course.toString() === course._id.toString();
 	});
-	if (isCourseAlreadyExist) return next(new CustomError("Course already added in your playlist", 409));
+	if (isCourseAlreadyExist)
+		return next(new CustomError("Course already added in your playlist", 409));
 	////
 	user.playlist.push({
 		course: course._id,

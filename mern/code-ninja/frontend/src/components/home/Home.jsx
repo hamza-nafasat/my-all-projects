@@ -8,7 +8,7 @@ const Home = () => {
 	const buttonColor = { dark: "purple", light: "yellow" };
 	const bgColor = {
 		light: "linear(to-r, teal.500, yellow.400)",
-		dark: "linear(to-r, purple.800 ,gray.900)",
+		dark: "linear(to-r, purple.800 ,gray.800)",
 	};
 
 	return (
@@ -39,8 +39,8 @@ const Home = () => {
 						textShadow={"2px 2px 4px rgba(0, 0, 0, 0.2)"}
 					/>
 					<Text maxW={"450px"}>
-						Discover valuable content at an affordable price. Start your learning journey today with
-						CodeNinjas!
+						Discover valuable content at an affordable price. Start your learning
+						journey today with CodeNinjas!
 					</Text>
 					<Link to="/courses">
 						<Button
