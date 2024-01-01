@@ -6,9 +6,7 @@ import Layout from "@/components/Globel/Layout";
 import { LinkArrow } from "@/components/Globel/Icons";
 import AnimatedText from "@/components/Globel/AnimatedText";
 import TransitionEffect from "@/components/Globel/TransitionEffect";
-import profilePic from "../../public/images/profile/developer-pic-1.png";
-import lightBulb from "../../public/images/svgs/miscellaneous_icons_1.svg";
-
+import { IndexPagePic } from "@/components/Globel/Text";
 export default function Home() {
 	return (
 		<>
@@ -26,13 +24,12 @@ export default function Home() {
 						{/* ============== */}
 						<div className="w-1/2 lg:hidden md:inline-block md:w-full">
 							<Image
-								priority
-								src={profilePic}
+								src={IndexPagePic}
 								alt="Hamza Nafasat"
 								className="w-full h-auto"
-								sizes="(max-width:768px) 100vw,
-								(max-width:1200px) 50vw
-								50vw"
+								width={500}
+								height={500}
+								priority
 							/>
 						</div>
 						<div className="w-1/2 flex flex-col items-center self-center lg:w-full">
@@ -66,7 +63,7 @@ export default function Home() {
 									<LinkArrow className={"w-6 ml-1"} />
 								</Link>
 								<Link
-									href="mailto:gyromaster55@gmail.com"
+									href="https://wa.me/03064155025"
 									target="-blank"
 									className="ml-4 text-lg font-medium capitalize dark:text-light underline
 									hover:scale-110 transition-all duration-300 text-dark md:text-base"
@@ -78,17 +75,6 @@ export default function Home() {
 					</div>
 				</Layout>
 				<HireMe />
-				{/* BULB IMAGE  */}
-				{/* =========== */}
-				<div className="absolute right-8 xl:right-2 bottom-8 inline-block w-24 lg:hidden">
-					<Image
-						priority
-						src={lightBulb}
-						alt="light bulb"
-						className="h-auto w-full"
-						sizes="(max-width:768px) 100vw, (max-width:1200px) 50vw, 33vw"
-					/>
-				</div>
 			</main>
 		</>
 	);

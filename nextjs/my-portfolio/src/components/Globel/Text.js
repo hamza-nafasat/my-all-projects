@@ -1,3 +1,10 @@
+const IndexPagePic =
+	"https://res.cloudinary.com/hamzanafasat/image/upload/v1704068266/portfolio%20website/u8tenv9sg4vmxxt6a9xz.png";
+const AboutPageDp =
+	"https://res.cloudinary.com/hamzanafasat/image/upload/v1704067146/portfolio%20website/rh73wahkxdruyvb12jzr.jpg";
+
+export { IndexPagePic, AboutPageDp };
+
 export const SIMPLEOVERVIEW = [
 	{ text: "Satisfied Clients", num: 20 },
 	{ text: "Projects Completed", num: 10 },
@@ -37,7 +44,6 @@ export const EXPERIENCES = [
 		work: "Contributed to the development of streaming technologies at Netflix, optimizing video delivery and enhancing the overall user experience for millions of subscribers worldwide.",
 	},
 ];
-
 export const EDUCATIONLIST = [
 	{
 		type: "Bachelor Of Science In Computer Science",
@@ -58,55 +64,77 @@ export const EDUCATIONLIST = [
 		info: "Completed coursework in advanced topics such as Reinforcement Learning, Computer Vision, and Machine Learning Engineering",
 	},
 ];
-
-// const ProjectsData = {
-// 	a: {
-// 		type: "Featured Project",
-// 		title: "Crypto Screener Application",
-//
-// 		link: "/",
-// 		github: "/",
-// 		summery:
-// 			"A feature-rich Crypto Screener App using React, Tailwind CSS, Context API,  React Router and Recharts.It shows detail regarding almost all the cryptocurrency.You can easily convert the price in your ocal currency.",
-// 	},
-// 	b: {
-// 		type: "",
-// 		title: "",
-//
-// 		link: "/",
-// 		github: "/",
-// 		summery: "",
-// 	},
-// 	b: {
-// 		type: "",
-// 		title: "",
-//
-// 		link: "/",
-// 		github: "/",
-// 		summery: "",
-// 	},
-// 	b: {
-// 		type: "",
-// 		title: "",
-//
-// 		link: "/",
-// 		github: "/",
-// 		summery: "",
-// 	},
-// 	b: {
-// 		type: "",
-// 		title: "",
-//
-// 		link: "/",
-// 		github: "/",
-// 		summery: "",
-// 	},
-// 	b: {
-// 		type: "",
-// 		title: "",
-//
-// 		link: "/",
-// 		github: "/",
-// 		summery: "",
-// 	},
-// };
+export const FEATUREDPROJECTDATA = [
+	{
+		type: "Featured Project",
+		title: "Crypto Screener Application",
+		link: "/",
+		github: "/",
+		image: "https://res.cloudinary.com/hamzanafasat/image/upload/v1704068396/portfolio%20website/uwah9dcw4n3wnoudtc0i.jpg",
+		summery:
+			"A feature-rich Crypto Screener App using React, Tailwind CSS, Context API,  React Router and Recharts.It shows detail regarding almost all the cryptocurrency.You can easily convert the price in your ocal currency.",
+	},
+	{
+		type: "Featured Project",
+		title: "Crypto Screener Application",
+		link: "/",
+		github: "/",
+		image: "https://res.cloudinary.com/hamzanafasat/image/upload/v1704068396/portfolio%20website/uwah9dcw4n3wnoudtc0i.jpg",
+		summery:
+			"A feature-rich Crypto Screener App using React, Tailwind CSS, Context API, React Router and Recharts.It shows detail regarding almost all the cryptocurrency. You can easily convert the price in your ocal currency.",
+	},
+];
+export const SMAILLPROJECTDATA = [
+	{
+		type: "Featured Project",
+		title: "Crypto Screener Application",
+		link: "/",
+		github: "/",
+		image: "https://res.cloudinary.com/hamzanafasat/image/upload/v1704068409/portfolio%20website/wcsealnghyrskxruyftq.jpg",
+	},
+	{
+		type: "Featured Project",
+		title: "Crypto Screener Application",
+		link: "/",
+		github: "/",
+		image: "https://res.cloudinary.com/hamzanafasat/image/upload/v1704068409/portfolio%20website/wcsealnghyrskxruyftq.jpg",
+	},
+];
+export const FEATUREDARTICLEDATA = [
+	{
+		title: "Creating Stunning Loading Screens In React: Build 3 Types Of Loading Screens",
+		time: "9 min read",
+		link: "/",
+		image: "https://res.cloudinary.com/hamzanafasat/image/upload/v1704068396/portfolio%20website/uwah9dcw4n3wnoudtc0i.jpg",
+		summery:
+			"Build A Custom Pagination Component In Reactjs From Scratch Learn how to build a custom pagination component in ReactJS from scratch.Follow this step-by-step guide to integrate Pagination component in your ReactJS project",
+	},
+	{
+		title: "Creating Stunning Loading Screens In React: Build 3 Types Of Loading Screens",
+		time: "9 min read",
+		link: "/",
+		image: "https://res.cloudinary.com/hamzanafasat/image/upload/v1704068396/portfolio%20website/uwah9dcw4n3wnoudtc0i.jpg",
+		summery:
+			"Build A Custom Pagination Component In Reactjs From Scratch Learn how to build a custom pagination component in ReactJS from scratch.Follow this step-by-step guide to integrate Pagination component in your ReactJS project",
+	},
+];
+export const SMAILLARTICLEDATA = [
+	{
+		image: "https://res.cloudinary.com/hamzanafasat/image/upload/v1704068409/portfolio%20website/wcsealnghyrskxruyftq.jpg",
+		title: "Form Validation In Reactjs: Build A Reusable Custom Hook For Inputs And ErrorHandling",
+		date: "March 23,2023",
+		link: "/",
+	},
+	{
+		image: "https://res.cloudinary.com/hamzanafasat/image/upload/v1704068409/portfolio%20website/wcsealnghyrskxruyftq.jpg",
+		title: "Form Validation In Reactjs: Build A Reusable Custom Hook For Inputs And ErrorHandling",
+		date: "March 23,2023",
+		link: "/",
+	},
+	{
+		image: "https://res.cloudinary.com/hamzanafasat/image/upload/v1704068409/portfolio%20website/wcsealnghyrskxruyftq.jpg",
+		title: "Form Validation In Reactjs: Build A Reusable Custom Hook For Inputs And ErrorHandling",
+		date: "March 23,2023",
+		link: "/",
+	},
+];

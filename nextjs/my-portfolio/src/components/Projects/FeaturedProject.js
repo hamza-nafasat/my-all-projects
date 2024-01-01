@@ -19,7 +19,11 @@ const FearuredProject = ({ type, title, summery, image, link = "", github = "" }
 				dark:bg-light rounded-br-3xl xs:-right-2 sm:h-[102%] xs:w-full xs:rounded-[1.5rem]"
 			/>
 			{/* PROJECT IMAGE  */}
-			<Link href={link} target="_blank" className="w-1/2 cursor-pointer overflow-hidden rounded-lg lg:w-full">
+			<Link
+				href={link}
+				target="_blank"
+				className="w-1/2 cursor-pointer overflow-hidden rounded-lg lg:w-full"
+			>
 				<FeaturedImage
 					src={image}
 					alt={title}
@@ -27,9 +31,9 @@ const FearuredProject = ({ type, title, summery, image, link = "", github = "" }
 					whileTap={{ scale: 1 }}
 					whileHover={{ scale: 1.05 }}
 					transition={{ duration: 0.3 }}
-					sizes="(max-width:768px) 100vw,
-					(max-width:1200px) 50vw
-					50vw"
+					width={500}
+					height={500}
+					priority
 				/>
 			</Link>
 			{/* PROJECT TEXT  */}
@@ -41,7 +45,9 @@ const FearuredProject = ({ type, title, summery, image, link = "", github = "" }
 				</span>
 				{/* TITLE  */}
 				<Link href={link} target="_blank" className="hover:underline underline-offset-2">
-					<h2 className="my-2 w-full text-left text-4xl font-bold lg:text-3xl xs:text-2xl">{title}</h2>
+					<h2 className="my-2 w-full text-left text-4xl font-bold lg:text-3xl xs:text-2xl">
+						{title}
+					</h2>
 				</Link>
 				{/* SUMMERY  */}
 				<p className="my-2 font-medium text-dark dark:text-light md:text-sm xl:text-sm lg:text-base ">

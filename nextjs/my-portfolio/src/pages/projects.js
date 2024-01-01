@@ -1,10 +1,10 @@
 import Head from "next/head";
 import Layout from "@/components/Globel/Layout";
-import { projectImages } from "@/components/Globel/Images";
 import AnimatedText from "@/components/Globel/AnimatedText";
 import SmallProject from "@/components/Projects/SmallProject";
-import FearuredProject from "@/components/Projects/FeaturedProject";
+import FeaturedProject from "@/components/Projects/FeaturedProject";
 import TransitionEffect from "@/components/Globel/TransitionEffect";
+import { FEATUREDPROJECTDATA, SMAILLPROJECTDATA } from "@/components/Globel/Text";
 
 const projects = () => {
 	return (
@@ -23,76 +23,31 @@ const projects = () => {
 					<div className="grid grid-cols-12 gap-24 gap-y-32 xl:gap-x-16 lg:gap-x-8 md:gap-y-24 sm:gap-x-0">
 						{/* FEATURED PROJECT*/}
 						{/*  =============  */}
-						<div className="col-span-12">
-							<FearuredProject
-								type="Featured Project"
-								title="Crypto Screener Application"
-								summery="A feature-rich Crypto Screener App using React, Tailwind CSS, Context API, 
-                                React Router and Recharts.It shows detail regarding almost all the cryptocurrency. 
-                                You can easily convert the price in your ocal currency."
-								image={projectImages.a}
-								link="/"
-								github="/"
-							/>
-						</div>
+						{FEATUREDPROJECTDATA.map((item, i) => (
+							<div key={i} className="col-span-12">
+								<FeaturedProject
+									type={item.type}
+									title={item.title}
+									summery={item.summery}
+									link={item.link}
+									github={item.github}
+									image={item.image}
+								/>
+							</div>
+						))}
 						{/* SMALL PROJECT 1 */}
 						{/*  =============  */}
-						<div className="col-span-6 sm:col-span-12">
-							<SmallProject
-								type="Featured Project"
-								title="Crypto Screener Application"
-								image={projectImages.b}
-								link="/"
-								github="/"
-							/>
-						</div>
-						{/* SMALL PROJECT 2 */}
-						{/*  =============  */}
-						<div className="col-span-6 sm:col-span-12 ">
-							<SmallProject
-								type="Featured Project"
-								title="Crypto Screener Application"
-								image={projectImages.c}
-								link="/"
-								github="/"
-							/>
-						</div>
-						{/* FEATURED PROJECT*/}
-						{/*  =============  */}
-						<div className="col-span-12">
-							<FearuredProject
-								type="Featured Project"
-								title="Crypto Screener Application"
-								summery="A feature-rich Crypto Screener App using React, Tailwind CSS, Context API, 
-                                React Router and Recharts.It shows detail regarding almost all the cryptocurrency. 
-                                You can easily convert the price in your ocal currency."
-								image={projectImages.d}
-								link="/"
-								github="/"
-							/>
-						</div>
-						{/* SMALL PROJECT 1 */}
-						{/*  =============  */}
-						<div className="col-span-6 sm:col-span-12">
-							<SmallProject
-								type="Featured Project"
-								title="Crypto Screener Application"
-								image={projectImages.e}
-								link="/"
-								github="/"
-							/>
-						</div>
-						{/* SMALL PROJECT 2 */}
-						{/*  =============  */}
-						<div className="col-span-6 sm:col-span-12">
-							<SmallProject
-								type="Featured Project"
-								title="Crypto Screener Application"
-								image={projectImages.f}
-								link="/"
-								github="/"
-							/>
-						</div>
+						{SMAILLPROJECTDATA.map((item, i) => (
+							<div key={i} className="col-span-6 sm:col-span-12">
+								<SmallProject
+									type={item.type}
+									title={item.title}
+									image={item.image}
+									link={item.link}
+									github={item.github}
+								/>
+							</div>
+						))}
 					</div>
 				</Layout>
 			</main>

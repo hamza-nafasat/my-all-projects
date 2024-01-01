@@ -32,9 +32,9 @@ const MovingImage = ({ image, title, link }) => {
 				initial={{ opacity: 0 }}
 				className="z-10 w-96 h-auto hidden absolute rounded-xl lg:w-60 md:w-0 md:-z-10"
 				whileInView={{ opacity: 1, transition: { duration: 0.3 } }}
-				sizes="(max-width:768px) 100vw,
-				(max-width:1200px) 50vw
-				50vw"
+				height={500}
+				width={500}
+				priority
 			/>
 		</Link>
 	);

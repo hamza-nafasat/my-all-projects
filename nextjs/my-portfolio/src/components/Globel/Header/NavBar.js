@@ -1,10 +1,9 @@
 import Logo from "./Logo";
 import { useState } from "react";
-import { MoonIcon, SunIcon } from "../Icons";
 import { Drawer, DrawerButton } from "./Drawer";
 import { CustomLink, MotionA } from "./CustomLink";
 import useThemeSwitcher from "@/components/Hook/useThemeSwitcher";
-import { DribbbleIcon, GithubIcon, LinkedInIcon, PinterestIcon, TwitterIcon } from "../Icons";
+import { GithubIcon, LinkedInIcon, Mailbox, Instagrame, MoonIcon, SunIcon } from "../Icons";
 
 const NavBar = () => {
 	const [mode, setMode] = useThemeSwitcher();
@@ -35,11 +34,17 @@ const NavBar = () => {
 				{/* ICONS OF NAVBAR */}
 				{/* =============== */}
 				<nav className="flex items-center justify-center flex-wrap">
-					<MotionA href="https://twitter.com" text={<TwitterIcon />} className="ml-0" />
-					<MotionA href="https://github.com" text={<GithubIcon />} />
-					<MotionA href="https://linkedin.com" text={<LinkedInIcon />} />
-					<MotionA href="https://dribbble.com" text={<DribbbleIcon />} />
-					<MotionA href="https://pinterest.com" text={<PinterestIcon />} className="bg-light" />
+					<MotionA
+						href="https://www.instagram.com/crazy_hami_"
+						text={<Instagrame />}
+						className="ml-0"
+					/>
+					<MotionA href="mailto:gyromaster55@gmail.com" text={<Mailbox />} />
+					<MotionA href="https://github.com/hamzanafasat" text={<GithubIcon />} />
+					<MotionA
+						href="https://www.linkedin.com/in/hamza-nafasat-9b0b87299/"
+						text={<LinkedInIcon />}
+					/>
 					{/* LIGHT AND DARK MOOD BUTTON */}
 					{/* ========================== */}
 					<button

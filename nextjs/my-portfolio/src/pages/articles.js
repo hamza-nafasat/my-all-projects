@@ -2,10 +2,10 @@ import React from "react";
 import Head from "next/head";
 import Layout from "@/components/Globel/Layout";
 import AnimatedText from "@/components/Globel/AnimatedText";
-import { articlesImages } from "@/components/Globel/Images";
 import SimpleArticle from "@/components/Articles/SimpleArticle";
 import FeaturedArticle from "@/components/Articles/FeaturedArticle";
 import TransitionEffect from "@/components/Globel/TransitionEffect";
+import { FEATUREDARTICLEDATA, SMAILLARTICLEDATA } from "@/components/Globel/Text";
 
 const articles = () => {
 	return (
@@ -24,24 +24,16 @@ const articles = () => {
 					{/* ARTICLE WITH IMAGE LIKE CARD  */}
 					{/* ============================  */}
 					<ul className="grid grid-cols-2 gap-16 lg:gap-8 md:grid-cols-1 md:gap-y-16">
-						<FeaturedArticle
-							image={articlesImages.a}
-							title="Creating Stunning Loading Screens In React: Build 3 Types Of Loading Screens"
-							time="9 min read"
-							summery="Build A Custom Pagination Component In Reactjs From Scratch Learn how to build 
-                            a custom pagination component in ReactJS from scratch.Follow this step-by-step guide to
-                            integrate Pagination component in your ReactJS project"
-							link=""
-						/>
-						<FeaturedArticle
-							image={articlesImages.b}
-							title="Build A Custom Pagination Component In Reactjs From Scratch"
-							time="9 min read"
-							summery="Build A Custom Pagination Component In Reactjs From Scratch Learn how to build 
-                            a custom pagination component in ReactJS from scratch.Follow this step-by-step guide to
-                            integrate Pagination component in your ReactJS project"
-							link=""
-						/>
+						{FEATUREDARTICLEDATA.map((item, i) => (
+							<FeaturedArticle
+								key={i}
+								image={item.image}
+								title={item.title}
+								time={item.time}
+								summery={item.summery}
+								link={item.link}
+							/>
+						))}
 					</ul>
 					<h2 className="font-bold text-4xl w-full text-center dark:text-light my-16 mt-32">
 						All Articles
@@ -49,34 +41,15 @@ const articles = () => {
 					{/* SIMPLE ARTICLE  */}
 					{/* ==============  */}
 					<ul>
-						<SimpleArticle
-							image={articlesImages.c}
-							title="Form Validation In Reactjs: Build A Reusable Custom Hook For Inputs And Error
-                            Handling"
-							date="March 23,2023"
-							link=""
-						/>
-						<SimpleArticle
-							image={articlesImages.d}
-							title="Form Validation In Reactjs: Build A Reusable Custom Hook For Inputs And Error
-                            Handling"
-							date="March 23,2023"
-							link=""
-						/>
-						<SimpleArticle
-							image={articlesImages.e}
-							title="Form Validation In Reactjs: Build A Reusable Custom Hook For Inputs And Error
-                            Handling"
-							date="March 23,2023"
-							link=""
-						/>
-						<SimpleArticle
-							image={articlesImages.f}
-							title="Form Validation In Reactjs: Build A Reusable Custom Hook For Inputs And Error
-                            Handling"
-							date="March 23,2023"
-							link=""
-						/>
+						{SMAILLARTICLEDATA.map((item, i) => (
+							<SimpleArticle
+								key={i}
+								image={item.image}
+								title={item.title}
+								date={item.date}
+								link={item.link}
+							/>
+						))}
 					</ul>
 				</Layout>
 			</main>

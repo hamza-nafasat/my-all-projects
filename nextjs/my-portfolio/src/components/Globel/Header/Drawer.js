@@ -1,6 +1,14 @@
 import { motion } from "framer-motion";
 import { CustomMobileLink, MotionA } from "./CustomLink";
-import { DribbbleIcon, GithubIcon, LinkedInIcon, MoonIcon, PinterestIcon, SunIcon, TwitterIcon } from "../Icons";
+import {
+	GithubIcon,
+	Instagrame,
+	LinkedInIcon,
+	MoonIcon,
+	SunIcon,
+	TwitterIcon,
+	Mailbox,
+} from "../Icons";
 
 export const Drawer = ({ mode, setMode, drawerHandle }) => {
 	return (
@@ -22,11 +30,17 @@ export const Drawer = ({ mode, setMode, drawerHandle }) => {
 			{/* ICONS OF NAVBAR */}
 			{/* =============== */}
 			<nav className="flex items-center justify-center flex-wrap mt-4">
-				<MotionA href="https://twitter.com" text={<TwitterIcon />} className="ml-0" />
-				<MotionA href="https://github.com" text={<GithubIcon />} />
-				<MotionA href="https://linkedin.com" text={<LinkedInIcon />} />
-				<MotionA href="https://dribbble.com" text={<DribbbleIcon />} />
-				<MotionA href="https://pinterest.com" text={<PinterestIcon />} className="bg-light" />
+				<MotionA
+					className="ml-0"
+					text={<Instagrame />}
+					href="https://www.instagram.com/crazy_hami_"
+				/>
+				<MotionA href="https://github.com/hamzanafasat" text={<GithubIcon />} />
+				<MotionA
+					text={<LinkedInIcon />}
+					href="https://www.linkedin.com/in/hamza-nafasat-9b0b87299/"
+				/>
+				<MotionA href="mailto:gyromaster55@gmail.com" text={<Mailbox />} />
 				{/* LIGHT AND DARK MOOD BUTTON */}
 				{/* ========================== */}
 				<button
@@ -44,7 +58,10 @@ export const Drawer = ({ mode, setMode, drawerHandle }) => {
 
 export const DrawerButton = ({ drawerHandle, isOpen }) => {
 	return (
-		<button onClick={drawerHandle} className="flex-col justify-center items-center hidden lg:flex mt-2">
+		<button
+			onClick={drawerHandle}
+			className="flex-col justify-center items-center hidden lg:flex mt-2"
+		>
 			<span
 				className={`bg-dark dark:bg-light transition-all duration-300 ease-out block h-0.5 w-6 
                 rounded-none ${isOpen ? "rotate-45 translate-y-1" : "-translate-y-1 "} `}

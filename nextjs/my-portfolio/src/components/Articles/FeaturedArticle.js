@@ -14,7 +14,11 @@ const FeaturedArticle = ({ image, title, time, summery, link = "" }) => {
 				className="absolute top-0 -right-3 -z-10 w-[101%] h-[103%] rounded-[2rem] bg-dark dark:bg-light
 				rounded-br-3xl xs:-right-2 sm:h-[102%] xs:w-full xs:rounded-[1.5rem]"
 			/>
-			<Link href={link} target="_blank" className="w-full inline-block overflow-hidden rounded-lg cursor-pointer">
+			<Link
+				href={link}
+				target="_blank"
+				className="w-full inline-block overflow-hidden rounded-lg cursor-pointer"
+			>
 				<FeaturedImage
 					src={image}
 					alt={title}
@@ -22,9 +26,9 @@ const FeaturedArticle = ({ image, title, time, summery, link = "" }) => {
 					whileTap={{ scale: 1 }}
 					whileHover={{ scale: 1.1 }}
 					transition={{ duration: 0.3 }}
-					sizes="(max-width:768px) 100vw,
-					(max-width:1200px) 50vw
-					50vw"
+					width={500}
+					height={500}
+					priority
 				/>
 			</Link>
 			<Link href={link} target="_blank">
@@ -34,7 +38,9 @@ const FeaturedArticle = ({ image, title, time, summery, link = "" }) => {
 			</Link>
 			<p className="text-sm mb-2 xs:text-xs ">{summery}</p>
 			<Link href={link} target="_blank">
-				<span className="text-primary dark:text-primaryDark font-semibold xs:text-sm">{time}</span>
+				<span className="text-primary dark:text-primaryDark font-semibold xs:text-sm">
+					{time}
+				</span>
 			</Link>
 		</li>
 	);

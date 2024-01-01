@@ -9,8 +9,7 @@ import { SIMPLEOVERVIEW } from "@/components/Globel/Text";
 import AnimatedText from "@/components/Globel/AnimatedText";
 import TransitionEffect from "@/components/Globel/TransitionEffect";
 import { useInView, useMotionValue, useSpring } from "framer-motion";
-// import profilePic from "../../public/images/profile/myProfile.jpg";
-import profilePic from "../../public/images/profile/developer-pic-2.jpg";
+import { AboutPageDp } from "@/components/Globel/Text";
 
 const AnimatedNumber = ({ value }) => {
 	const ref = useRef(null);
@@ -77,19 +76,17 @@ const about = () => {
 						{/* PROFILE IMAGE  */}
 						{/* ============== */}
 						<div
-							className="col-span-3 xl:col-span-3 relative h-max rounded-2xl border border-solid
+							className="col-span-3 xl:col-span-3 relative h-max   rounded-2xl border border-solid
 							border-dark p-8 dark:border-light bg-light dark:bg-dark 
 							md:order-1 md:col-span-8 xl:mt-10 md:mx-[30%] sm:mx-[20%] xs:mx-4"
 						>
 							<div className="absolute top-0 -right-3 -z-10 w-[102%] h-[103%] rounded-[2rem] bg-dark dark:bg-light" />
 							<Image
-								src={profilePic}
+								src={AboutPageDp}
 								alt="Hamza Nafasat"
-								className="w-full h-auto rounded-2xl lg:mx-auto"
+								width={500}
+								height={500}
 								priority
-								sizes="(max-width:768px) 100vw,
-								(max-width:1200px) 50vw
-								33vw"
 							/>
 						</div>
 						{/* PROFILE DETAILS  */}

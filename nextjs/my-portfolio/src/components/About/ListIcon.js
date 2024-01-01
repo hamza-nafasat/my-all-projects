@@ -3,6 +3,7 @@ import { motion, useScroll } from "framer-motion";
 const ListIcon = ({ referance }) => {
 	const { scrollYProgress } = useScroll({
 		target: referance,
+		layoutEffect: false,
 		offset: ["center end", "center center"],
 	});
 
@@ -14,7 +15,12 @@ const ListIcon = ({ referance }) => {
 				viewBox="0 0 100 100"
 				className="-rotate-90  md:w-[60px] md:h-[60px] xs:w-[40px] xs:h-[40px]"
 			>
-				<circle cx="75" cy="50" r="20" className="stroke-primary dark:stroke-primaryDark stroke-1 fill-none" />
+				<circle
+					cx="75"
+					cy="50"
+					r="20"
+					className="stroke-primary dark:stroke-primaryDark stroke-1 fill-none"
+				/>
 				<motion.circle
 					cx="75"
 					cy="50"
@@ -22,7 +28,12 @@ const ListIcon = ({ referance }) => {
 					className="stroke-[5px] fill-light dark:fill-dark"
 					style={{ pathLength: scrollYProgress }}
 				/>
-				<circle cx="75" cy="50" r="10" className="stroke-1 fill-primary dark:fill-primaryDark" />
+				<circle
+					cx="75"
+					cy="50"
+					r="10"
+					className="stroke-1 fill-primary dark:fill-primaryDark"
+				/>
 			</svg>
 		</figure>
 	);

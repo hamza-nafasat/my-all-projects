@@ -18,7 +18,11 @@ const SmallProject = ({ type, title, image, link = "", github = "" }) => {
 			rounded-br-3xl xs:-right-2 sm:h-[102%] xs:w-full xs:rounded-[1.5rem]"
 			/>
 			{/* PROJECT IMAGE  */}
-			<Link href={link} target="_blank" className="w-full cursor-pointer overflow-hidden rounded-lg">
+			<Link
+				href={link}
+				target="_blank"
+				className="w-full cursor-pointer overflow-hidden rounded-lg"
+			>
 				<FeaturedImage
 					src={image}
 					alt={title}
@@ -26,9 +30,9 @@ const SmallProject = ({ type, title, image, link = "", github = "" }) => {
 					whileTap={{ scale: 1 }}
 					whileHover={{ scale: 1.05 }}
 					transition={{ duration: 0.3 }}
-					sizes="(max-width:768px) 100vw,
-					(max-width:1200px) 50vw
-					50vw"
+					width={500}
+					height={500}
+					priority
 				/>
 			</Link>
 			{/* PROJECT TEXT  */}
@@ -42,8 +46,14 @@ const SmallProject = ({ type, title, image, link = "", github = "" }) => {
 					{type}
 				</span>
 				{/* TITLE  */}
-				<Link href={link} target="_blank" className="hover:underline underline-offset-2 lg:text-2xl">
-					<h2 className="my-2 w-full text-left text-3xl font-bold lg:text-2xl">{title}</h2>
+				<Link
+					href={link}
+					target="_blank"
+					className="hover:underline underline-offset-2 lg:text-2xl"
+				>
+					<h2 className="my-2 w-full text-left text-3xl font-bold lg:text-2xl">
+						{title}
+					</h2>
 				</Link>
 				{/* PROJECT LINKS  */}
 				{/* ============== */}

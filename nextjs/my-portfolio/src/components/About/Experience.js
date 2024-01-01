@@ -12,7 +12,11 @@ const Details = ({ position, company, companyLink, time, address, work }) => {
 			justify-between md:w-[80%]"
 		>
 			<ListIcon referance={Listref} />
-			<motion.div initial={{ y: 50 }} whileInView={{ y: 0 }} transition={{ duration: 0.5, type: "spring" }}>
+			<motion.div
+				initial={{ y: 50 }}
+				whileInView={{ y: 0 }}
+				transition={{ duration: 0.5, type: "spring" }}
+			>
 				<h3 className="capitalize font-bold text-2xl sm:text-xl xs:text-lg">
 					{position} &nbsp;
 					<a
@@ -37,11 +41,14 @@ const Experience = () => {
 	const Lineref = useRef(null);
 	const { scrollYProgress } = useScroll({
 		target: Lineref,
+		layoutEffect: false,
 		offset: ["start end", "center start"],
 	});
 	return (
 		<div className="my-64">
-			<h2 className="font-bold text-8xl mb-32 w-full text-center md:text-6xl xs:text-4xl md:mb-16">Experience</h2>
+			<h2 className="font-bold text-8xl mb-32 w-full text-center md:text-6xl xs:text-4xl md:mb-16">
+				Experience
+			</h2>
 			<div className="w-[75%] mx-auto relative lg:w-[90%] md:w-full">
 				<motion.div
 					ref={Lineref}
