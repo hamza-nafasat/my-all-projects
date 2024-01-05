@@ -38,7 +38,7 @@ a {
 // NORMAL CLASSES
 // ==============
 .adminContainer {
-	@include grid(1fr 4fr, 2rem);
+	@include grid(1fr 4fr, 1.5rem);
 	height: 100vh;
 	background-color: whitesmoke;
 	> aside {

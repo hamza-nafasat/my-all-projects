@@ -97,8 +97,8 @@ const AdminAside = () => {
 
 export default AdminAside;
 
-// LI COMPONENT FOR LINKS
-// ======================
+// THIS IS LI COMPONENT FOR EVERY SECTION LINKS IN ASIDE
+// =====================================================
 interface LiComponentProps {
 	url: string;
 	text: string;

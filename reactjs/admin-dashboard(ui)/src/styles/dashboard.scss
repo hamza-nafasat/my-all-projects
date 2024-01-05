@@ -1,13 +1,15 @@
 .dashboard {
 	overflow-y: auto;
-	> .searchBar {
-		height: 4rem;
+	// SEARCH BAR ARTICLE CONTAINER
+	// ============================
+	> .searchContainer {
 		@include flex(row, unset);
+		height: 4rem;
 		padding: 0 1rem;
 		border-bottom: 1px solid rgba(0, 0, 0, 0.37);
 		> input {
-			margin-right: auto;
 			@include inputStyle(100%, 1rem 0);
+			margin-right: auto;
 			font-size: larger;
 		}
 		> svg {
@@ -17,6 +19,139 @@
 		> img {
 			@include square(2rem);
 			border-radius: 50%;
+		}
+	}
+	// WIDGET BOX ARTICLE CONTAINER
+	// ============================
+	> .widgetContainer {
+		@include flex(row, space-between, stretch, 1rem);
+		padding: 2rem 2rem 2rem 10px;
+		> .widgetItem {
+			@include flex(row, space-between, stretch, 5px);
+			background-color: white;
+			min-width: max-content;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.132);
+			border-radius: 10px;
+			padding: 2rem;
+			> .widgetInfo {
+				> p {
+					opacity: 0.7;
+					font-size: 0.8rem;
+				}
+				> h4 {
+					font-size: 1.5rem;
+				}
+				> span {
+					@include flex(row, unset, center, 0.2rem);
+				}
+			}
+			> .widgetCircleBar {
+				@include square(5rem);
+				background-color: green;
+				position: relative;
+				flex: none;
+				border-radius: 50%;
+				display: grid;
+				place-items: center;
+				&::before {
+					@include square(4rem);
+					content: "";
+					position: absolute;
+					background-color: white;
+					border-radius: 100%;
+				}
+				> span {
+					position: relative;
+				}
+			}
+		}
+	}
+	// GRAPH & INVENTRY ARTICLE CONTAINER
+	// ==================================
+	> .graphAndInvantryContainer {
+		@include flex(row, unset, unset, 2rem);
+		padding: 0 2rem 2rem 0;
+		> section {
+			background-color: white;
+			border-radius: 10px;
+		}
+		> .revenueChart {
+			width: 100%;
+			padding: 1rem 3rem;
+		}
+		> .inventryDetails {
+			@include flex(column, center, unset, 0);
+			width: 100%;
+			max-width: 16rem;
+			padding-bottom: 2rem;
+			> h2 {
+				@include heading;
+				margin: 1.5rem 0 2rem 0;
+				text-align: center;
+			}
+			> .inventryItem {
+				@include flex(row, space-between);
+				overflow-y: auto;
+				padding-left: 0.5rem;
+				width: 100%;
+				padding: 1rem;
+				> header > h5 {
+					@include heading(1px, 300, unset);
+				}
+				> .inventryBar {
+					width: 6rem;
+					height: 0.5rem;
+					background-color: rgb(217, 217, 217);
+					margin-left: auto;
+					border-radius: 20px;
+					flex: none;
+					overflow-x: hidden;
+					> div {
+						border-radius: 20px;
+						height: 100%;
+					}
+				}
+				> span {
+					font-size: 0.8rem;
+					font-weight: 700;
+				}
+			}
+		}
+	}
+	// TRANSACTION & GENDER ARTICLE CONTAINER
+	// ======================================
+	> .transactionAndGenderChartContainer {
+		@include flex(row, unset, unset, 2rem);
+		height: 30rem;
+		padding: 0 2rem 2rem 0;
+		> section {
+			width: 100%;
+			background-color: white;
+			box-shadow: 0 10px 10px rgba(0, 0, 0, 0.132);
+			border-radius: 10px;
+		}
+		> .genderChart {
+			max-width: 20rem;
+			position: relative;
+			padding: 1rem;
+			> h2 {
+				@include heading;
+				text-align: center;
+				margin: 1.5rem 0 2rem 0;
+			}
+			> p {
+				@include posCenter;
+				font-size: 2rem;
+				color: rgba(0, 0, 0, 0.634);
+			}
+		}
+		> .transactionTable {
+			padding: 1rem;
+			> h2 {
+				@include heading;
+				text-align: center;
+				margin: 1.5rem 0 2rem 0;
+			}
 		}
 	}
 }

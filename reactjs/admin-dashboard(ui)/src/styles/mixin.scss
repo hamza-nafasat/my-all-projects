@@ -39,14 +39,7 @@
 	width: $size;
 }
 
-@mixin customScrollbar(
-	$d: block,
-	$w: 12px,
-	$h: 12px,
-	$color: #3498db,
-	$bg: #ecf0f5,
-	$hover: #2980b9
-) {
+@mixin customScrollbar($d: block, $w: 12px, $h: 12px, $color: #3498db, $bg: #ecf0f5, $hover: #2980b9) {
 	&::-webkit-scrollbar {
 		display: $d;
 		width: $w;
