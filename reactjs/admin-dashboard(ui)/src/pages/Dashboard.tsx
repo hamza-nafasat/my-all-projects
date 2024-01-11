@@ -1,45 +1,20 @@
-import { FaRegBell } from "react-icons/fa";
-import AdminAside from "../components/AdminAside";
 import { BsSearch } from "react-icons/bs";
-import { HiTrendingUp, HiTrendingDown } from "react-icons/hi";
 import FakeData from "../assets/data.json";
-import { BarChart, DoughnutChart } from "../components/Charts";
+import { FaRegBell } from "react-icons/fa";
 import { BiMaleFemale } from "react-icons/bi";
+import AdminAside from "../components/AdminAside";
+import DashboardTable from "../components/DashboardTable";
+import { HiTrendingUp, HiTrendingDown } from "react-icons/hi";
+import { BarChart, DoughnutChart } from "../components/Charts";
+import { getColor } from "../components/subComponents/getColorsForPercentage";
 
 const Dashboard = () => {
-	// FUNCTION FOR GETTING COLORS ACORDING TO PERCENTAGE
-	const getColor = (percent: number): string => {
-		if (percent < 0) {
-			return "#FF0000";
-		} else if (percent <= 10) {
-			return "#87D068";
-		} else if (percent <= 20) {
-			return "#55C57A";
-		} else if (percent <= 30) {
-			return "#29B6F6";
-		} else if (percent <= 40) {
-			return "#42A5F5";
-		} else if (percent <= 50) {
-			return "#667EEA";
-		} else if (percent <= 60) {
-			return "#9C27B0";
-		} else if (percent <= 70) {
-			return "#F59E0B";
-		} else if (percent <= 80) {
-			return "#F9A825";
-		} else if (percent <= 90) {
-			return "#FABB50";
-		} else {
-			return "lime";
-		}
-	};
-
 	return (
 		<div className="adminContainer">
 			<AdminAside />
 			<main className="dashboard">
-				{/** SEARCH BAR ARTICLE **/}
-				{/************************/}
+				{/* === SEARCH BAR ARTICLE === */}
+				{/* ========================== */}
 				<article className="searchContainer">
 					<BsSearch />
 					<input
@@ -51,8 +26,8 @@ const Dashboard = () => {
 					<FaRegBell />
 					<img src="https://avatars.githubusercontent.com/u/149063128?v=4" alt="user dp" />
 				</article>
-				{/* WIGITS BOXES ARTICLE */}
-				{/************************/}
+				{/* == WIDGETS BOXES ARTICLE == */}
+				{/* =========================== */}
 				<article className="widgetContainer">
 					<WidgetItem
 						heading={"Revenue"}
@@ -62,7 +37,7 @@ const Dashboard = () => {
 						getColor={getColor}
 					/>
 					<WidgetItem
-						heading={"Transictios"}
+						heading={"Transaction"}
 						getColor={getColor}
 						value={300}
 						percent={100}
@@ -70,24 +45,24 @@ const Dashboard = () => {
 					<WidgetItem heading={"Products"} value={200} percent={-20} getColor={getColor} />
 					<WidgetItem heading={"Users"} value={4000} percent={79} getColor={getColor} />
 				</article>
-				{/**** GRAPH ARTICLE *****/}
-				{/************************/}
-				<article className="graphAndInvantryContainer">
+				{/* ====== GRAPH ARTICLE ====== */}
+				{/* =========================== */}
+				<article className="graphAndInventoryContainer">
 					<section className="revenueChart">
 						<BarChart
-							heading={"REVENUE & TRANSECIONS"}
+							heading={"REVENUE & TRANSACTIONS"}
 							title_1="Revenue"
 							bgColor_1="rgb(0,115,255)"
 							data_1={[300, 144, 433, 655, 237, 755]}
-							title_2="Transections"
+							title_2="Transactions"
 							bgColor_2="rgba(52,162,253,0.7)"
 							data_2={[600, 244, 133, 355, 937, 455]}
 						/>
 					</section>
-					<section className="inventryDetails">
-						<h2>Inventry</h2>
+					<section className="inventoryDetails">
+						<h2>InventOry</h2>
 						{FakeData.categories.map((item, i) => (
-							<InventryItem
+							<InventoryItem
 								key={i}
 								heading={item.heading}
 								value={item.value}
@@ -96,8 +71,8 @@ const Dashboard = () => {
 						))}
 					</section>
 				</article>
-				{/**** GRAPH ARTICLE *****/}
-				{/************************/}
+				{/* TRANSACTION & GENDER ARTICLE */}
+				{/* ============================ */}
 				<article className="transactionAndGenderChartContainer">
 					<section className="genderChart">
 						<h2>Gender Ratio</h2>
@@ -112,7 +87,8 @@ const Dashboard = () => {
 						</p>
 					</section>
 					<section className="transactionTable">
-						<h2>Top Transactions</h2>
+						{/* <h2>Top Transactions</h2> */}
+						<DashboardTable data={FakeData.transaction} />
 					</section>
 				</article>
 			</main>
@@ -122,7 +98,7 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-// COMMPONENT FOR ITEMS IN WIDGET CONTAINER
+// COMPONENT FOR ITEMS IN WIDGET CONTAINER
 // ========================================
 interface WidgetItemProps {
 	heading: string;
@@ -162,21 +138,21 @@ const WidgetItem = ({ heading, value, percent, getColor, amount = false }: Widge
 	);
 };
 
-// COMPONENT FOR ITEMS IN INVENTY CONTAINER
-// ========================================
-interface InventryItemProps {
+// COMPONENT FOR ITEMS IN INVENTORY CONTAINER
+// ==========================================
+interface InventoryItemProps {
 	heading: string;
 	value: number;
 	getColor: Function;
 }
-const InventryItem = ({ heading, value, getColor }: InventryItemProps) => {
+const InventoryItem = ({ heading, value, getColor }: InventoryItemProps) => {
 	const color = getColor(value);
 	return (
-		<section className="inventryItem">
+		<section className="inventoryItem">
 			<header>
 				<h5>{heading}</h5>
 			</header>
-			<div className="inventryBar">
+			<div className="inventoryBar">
 				<div style={{ backgroundColor: color, width: `${value}%` }} />
 			</div>
 			<span>{value}%</span>

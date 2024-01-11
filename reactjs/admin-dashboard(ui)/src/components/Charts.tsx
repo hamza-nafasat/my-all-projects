@@ -1,7 +1,7 @@
 import { Bar, Doughnut } from "react-chartjs-2";
+import { getLastYearMonths } from "./subComponents/getLastTwelveMonths";
 import { BarElement, ChartOptions, ChartData, ArcElement } from "chart.js";
 import { Chart as ChartJS, CategoryScale, LinearScale, Title, Tooltip, Legend } from "chart.js";
-
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
 
 // BAR CHART FOR SHOWING 2 OR 1 DATA
@@ -134,19 +134,3 @@ export const DoughnutChart = ({
 	};
 	return <Doughnut options={options} data={doughnutData} />;
 };
-
-// FUNCTION FOR GETTING LAST 12 MONTH DYNEMICALLY
-// ==============================================
-function getLastYearMonths(): string[] {
-	const months: string[] = [];
-	const data = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-	const currentMonth = new Date().getMonth();
-	const remains = 11 - currentMonth;
-	for (let i = currentMonth; i >= 0; i--) {
-		months.unshift(data[i]);
-	}
-	for (let i = remains; i > 0; i--) {
-		months.unshift(data[currentMonth + i]);
-	}
-	return months;
-}

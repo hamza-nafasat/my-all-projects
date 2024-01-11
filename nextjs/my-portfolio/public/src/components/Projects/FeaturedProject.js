@@ -67,7 +67,7 @@ const FearuredProject = ({ type, title, summery, image, link = "", github = "" }
 						<GithubIcon />
 					</MotionLink>
 					<Link
-						href={github}
+						href={link}
 						target="_blank"
 						className="ml-4 rounded-lg bg-dark text-light hover:bg-light hover:text-dark
 						border-2 border-solid border-dark dark:border-light transition-all duration-300 p-2 

@@ -36,19 +36,19 @@ const Skills = () => {
 				>
 					Web
 				</motion.div>
-				<SkillWraper name={"JWT"} x={"4vw"} y={"-20vw"} />
-				<SkillWraper name={"CSS"} x={"17vw"} y={"-7vw"} />
+				<SkillWraper name={"CSS"} x={"4vw"} y={"-20vw"} />
+				<SkillWraper name={"Tailwind"} x={"17vw"} y={"-7vw"} />
 				<SkillWraper name={"NextJS"} x={"21vw"} y={"3vw"} />
 				<SkillWraper name={"Github"} x={"-14vw"} y={"0vw"} />
 				<SkillWraper name={"Mongoose"} x={"0vw"} y={"12vw"} />
 				<SkillWraper name={"React"} x={"0vw"} y={"-12vw"} />
-				<SkillWraper name={"SCSS"} x={"35vw"} y={"-5vw"} />
+				<SkillWraper name={"SASS"} x={"35vw"} y={"-5vw"} />
 				<SkillWraper name={"NodeJS"} x={"-22vw"} y={"-10vw"} />
 				<SkillWraper name={"HTML"} x={"-12vw"} y={"-19vw"} />
 				<SkillWraper name={"MongoDB"} x={"-36vw"} y={"0vw"} />
 				<SkillWraper name={"Express"} x={"24vw"} y={"-14vw"} />
 				<SkillWraper name={"JavaScript"} x={"-25vw"} y={"14vw"} />
-				<SkillWraper name={"Tailwind"} x={"25vw"} y={"14vw"} />
+				<SkillWraper name={"TypeScript"} x={"25vw"} y={"14vw"} />
 			</div>
 		</>
 	);

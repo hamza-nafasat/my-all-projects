@@ -16,7 +16,7 @@ export const GithubIcon = ({ className, ...rest }) => (
 		/>
 	</svg>
 );
-export const Watsapp = ({ className, ...rest }) => (
+export const Whatsapp = ({ className, ...rest }) => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		width={1080}
@@ -124,12 +124,7 @@ export const SunIcon = ({ className, ...rest }) => (
 		>
 			<g strokeDasharray="2">
 				<path d="M12 21v1M21 12h1M12 3v-1M3 12h-1">
-					<animate
-						fill="freeze"
-						attributeName="stroke-dashoffset"
-						dur="0.2s"
-						values="4;2"
-					/>
+					<animate fill="freeze" attributeName="stroke-dashoffset" dur="0.2s" values="4;2" />
 				</path>
 				<path d="M18.5 18.5l0.5 0.5M18.5 5.5l0.5 -0.5M5.5 5.5l-0.5 -0.5M5.5 18.5l-0.5 0.5">
 					<animate

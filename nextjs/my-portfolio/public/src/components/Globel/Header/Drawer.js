@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { CustomMobileLink, MotionA } from "./CustomLink";
-import { GithubIcon, Instagrame, LinkedInIcon, MoonIcon, SunIcon, Mailbox } from "../Icons";
+import { GithubIcon, Instagrame, LinkedInIcon, MoonIcon, SunIcon, Whatsapp } from "../Icons";
 
 export const Drawer = ({ mode, setMode, drawerHandle }) => {
 	return (
@@ -17,18 +17,15 @@ export const Drawer = ({ mode, setMode, drawerHandle }) => {
 				<CustomMobileLink href="/" title={"Home"} toggel={drawerHandle} />
 				<CustomMobileLink href="/about" title={"About"} toggel={drawerHandle} />
 				<CustomMobileLink href="/projects" title={"Projects"} toggel={drawerHandle} />
-				<CustomMobileLink href="/others" title={"Others"} toggel={drawerHandle} />
+				{/* <CustomMobileLink href="/others" title={"Others"} toggel={drawerHandle} /> */}
 			</nav>
 			{/* ICONS OF NAVBAR */}
 			{/* =============== */}
 			<nav className="flex items-center justify-center flex-wrap mt-4">
-				<MotionA className="ml-0" href="mailto:gyromaster55@gmail.com" text={<Mailbox />} />
+				<MotionA className="ml-0" href="https://wa.me/+923064155025" text={<Whatsapp />} />
 				<MotionA href="https://github.com/hamzanafasat" text={<GithubIcon />} />
 				<MotionA href="https://www.instagram.com/crazy_hami_" text={<Instagrame />} />
-				<MotionA
-					href="https://www.linkedin.com/in/hamza-nafasat-9b0b87299/"
-					text={<LinkedInIcon />}
-				/>
+				<MotionA href="https://www.linkedin.com/in/hamza-nafasat" text={<LinkedInIcon />} />
 				{/* LIGHT AND DARK MOOD BUTTON */}
 				{/* ========================== */}
 				<button

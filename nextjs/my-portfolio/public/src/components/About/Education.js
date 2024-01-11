@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import ListIcon from "./ListIcon";
 import { useScroll, motion } from "framer-motion";
-import { EDUCATIONLIST } from "../Globel/Text";
+import { EDUCATION } from "../Globel/Text";
 
 const Details = ({ type, time, place, info }) => {
 	const Listref = useRef(null);
@@ -18,7 +18,7 @@ const Details = ({ type, time, place, info }) => {
 			>
 				<h3 className="capitalize font-bold text-2xl sm:text-xl xs:text-lg">{type}</h3>
 				<span className="capitalize font-medium text-dark/75 dark:text-light/75 xs:text-sm">
-					{time} | {place}
+					{time ? `${time} | ${place}` : place}
 				</span>
 				<p className="font-medium w-full md:text-sm text-left">{info}</p>
 			</motion.div>
@@ -47,7 +47,7 @@ const Education = () => {
 					style={{ scaleY: scrollYProgress }}
 				/>
 				<ul className="w-full flex flex-col items-start justify-between ml-4 xs:ml-2">
-					{EDUCATIONLIST.map((item, i) => (
+					{EDUCATION.map((item, i) => (
 						<Details
 							key={i + "kldsfb" + i}
 							type={item.type}

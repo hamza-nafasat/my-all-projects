@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Drawer, DrawerButton } from "./Drawer";
 import { CustomLink, MotionA } from "./CustomLink";
 import useThemeSwitcher from "@/components/Hook/useThemeSwitcher";
-import { GithubIcon, Instagrame, LinkedInIcon, Mailbox, MoonIcon, SunIcon } from "../Icons";
+import { GithubIcon, Instagrame, LinkedInIcon, MoonIcon, SunIcon, Whatsapp } from "../Icons";
 
 const NavBar = () => {
 	const [mode, setMode] = useThemeSwitcher();
@@ -26,23 +26,19 @@ const NavBar = () => {
 				{/* MAIN LINKS OF NAVBAR */}
 				{/* ==================== */}
 				<nav>
-					<CustomLink href="/" title={"Home"} className="mr-2" />
-					<CustomLink href="/about" title={"About"} className="mx-2" />
-					<CustomLink href="/projects" title={"Projects"} className="mx-2" />
-					<CustomLink href="/others" title={"Others"} className="ml-2" />
+					<CustomLink href="/" title={"Home"} className="mr-8" />
+					<CustomLink href="/about" title={"About"} className="mx-8" />
+					<CustomLink href="/projects" title={"Projects"} className="ml-8" />
+					{/* <CustomLink href="/others" title={"Others"} className="ml-2" /> */}
 				</nav>
 				{/* ICONS OF NAVBAR */}
 				{/* =============== */}
 				<nav className="flex items-center justify-center flex-wrap">
-					<MotionA
-						className="ml-0"
-						href="mailto:gyromaster55@gmail.com"
-						text={<Mailbox />}
-					/>
+					<MotionA className="ml-0" href="https://wa.me/+923064155025" text={<Whatsapp />} />
 					<MotionA href="https://github.com/hamzanafasat" text={<GithubIcon />} />
 					<MotionA href="https://www.instagram.com/crazy_hami_" text={<Instagrame />} />
 					<MotionA
-						href="https://www.linkedin.com/in/hamza-nafasat-9b0b87299/"
+						href="https://www.linkedin.com/in/hamza-nafasat"
 						text={<LinkedInIcon />}
 					/>
 					{/* LIGHT AND DARK MOOD BUTTON */}
@@ -59,11 +55,18 @@ const NavBar = () => {
 			</div>
 			{/* LOGO */}
 			{/* ==== */}
-			<div className="absolute z-10 left-[50%] top-0 translate-x-[-50%] lg:-right-10 lg:top-2 lg:left-auto ">
-				<Logo />
+
+			<div className="absolute z-10 left-[50%] top-2 translate-x-[-50%] lg:-right-1 lg:top-4 lg:left-auto">
+				<Logo text={"HN"} />
 			</div>
 		</header>
 	);
 };
 
 export default NavBar;
+
+{
+	/* <div className="absolute z-10 left-[50%] top-0 translate-x-[-50%] lg:-right-10 lg:top-2 lg:left-auto ">
+				<Logo />
+			</div> */
+}

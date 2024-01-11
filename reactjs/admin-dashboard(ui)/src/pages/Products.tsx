@@ -1,4 +1,5 @@
 import AdminAside from "../components/AdminAside";
+
 const Products = () => {
 	return (
 		<div className="adminContainer">

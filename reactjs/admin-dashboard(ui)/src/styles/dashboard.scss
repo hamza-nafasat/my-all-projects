@@ -24,8 +24,8 @@
 	// WIDGET BOX ARTICLE CONTAINER
 	// ============================
 	> .widgetContainer {
-		@include flex(row, space-between, stretch, 1rem);
-		padding: 2rem 2rem 2rem 10px;
+		@include flex(row, space-around, stretch, 2rem, wrap);
+		padding: 2rem 2rem 2rem 0;
 		> .widgetItem {
 			@include flex(row, space-between, stretch, 5px);
 			background-color: white;
@@ -66,9 +66,9 @@
 			}
 		}
 	}
-	// GRAPH & INVENTRY ARTICLE CONTAINER
+	// GRAPH & INVENTORY ARTICLE CONTAINER
 	// ==================================
-	> .graphAndInvantryContainer {
+	> .graphAndInventoryContainer {
 		@include flex(row, unset, unset, 2rem);
 		padding: 0 2rem 2rem 0;
 		> section {
@@ -79,7 +79,7 @@
 			width: 100%;
 			padding: 1rem 3rem;
 		}
-		> .inventryDetails {
+		> .inventoryDetails {
 			@include flex(column, center, unset, 0);
 			width: 100%;
 			max-width: 16rem;
@@ -89,7 +89,7 @@
 				margin: 1.5rem 0 2rem 0;
 				text-align: center;
 			}
-			> .inventryItem {
+			> .inventoryItem {
 				@include flex(row, space-between);
 				overflow-y: auto;
 				padding-left: 0.5rem;
@@ -98,7 +98,7 @@
 				> header > h5 {
 					@include heading(1px, 300, unset);
 				}
-				> .inventryBar {
+				> .inventoryBar {
 					width: 6rem;
 					height: 0.5rem;
 					background-color: rgb(217, 217, 217);
@@ -146,11 +146,15 @@
 			}
 		}
 		> .transactionTable {
-			padding: 1rem;
-			> h2 {
-				@include heading;
-				text-align: center;
-				margin: 1.5rem 0 2rem 0;
+			> .transactionTableContainer {
+				padding: 1rem;
+				width: 100%;
+				overflow-x: auto;
+				> h2 {
+					@include heading;
+					text-align: center;
+					margin: 1.5rem 0 0 0;
+				}
 			}
 		}
 	}

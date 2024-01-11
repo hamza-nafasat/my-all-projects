@@ -41,8 +41,8 @@ const about = () => {
 			<main className="flex w-full flex-col items-center justify-center dark:text-light">
 				<Layout classname="pt-0 xl:pt-0 lg:pt-0 md:pt-0 sm:pt-0">
 					<AnimatedText
-						text={"My Journey"}
-						className="!mb-16 lg:!text-7xl sm:!text-5xl xs:!text-4xl sm:!mb-4"
+						text={"Coding Journey"}
+						className="!mb-16 lg:!text-7xl sm:!text-5xl xs:!text-3xl sm:!mb-4"
 					/>
 					<div className="grid w-full grid-cols-8 gap-16 sm:gap-8 ">
 						{/* PROFILE TEXT  */}

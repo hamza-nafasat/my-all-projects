@@ -12,19 +12,12 @@ const Footer = () => {
 				<span>{new Date().getFullYear()} &copy; All Rights Reserved</span>
 				<div className="flex items-center lg:py-2">
 					Made By{" "}
-					<span className="text-primary dark:text-primaryDark text-2xl px-1 ">
-						&#9825;
-					</span>{" "}
-					<Link
-						href="mailto:gyromaster55@gmail.com"
-						className="underline underline-offset-2"
-					>
-						Hamza Nafasat
-					</Link>
+					<span className="text-primary dark:text-primaryDark text-2xl px-1 ">&#9825;</span>{" "}
+					<p className="underline underline-offset-2">Hamza Nafasat</p>
 				</div>
 				<Link
 					target="_blank"
-					href={"https://wa.me/03064155025"}
+					href={"mailto:gyromaster55@gmail.com"}
 					className="underline underline-offset-2"
 				>
 					Say Hello
