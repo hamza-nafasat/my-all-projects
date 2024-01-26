@@ -1,7 +1,10 @@
-@import "./mixin.scss";
+@import "mixin.scss";
 @import "dashboard.scss";
 @import "loader.scss";
-
+@import "products.scss";
+@import "charts.scss";
+@import "dashboardApp.scss";
+@import "mediaQueries.scss";
 :root {
 	font-family: Inter, system-ui, Helvetica, Arial, sans-serif;
 	line-height: 1.5;
@@ -14,10 +17,12 @@
 	margin: 0;
 	box-sizing: border-box;
 }
+body {
+	background-color: whitesmoke;
+}
 li {
 	list-style: none;
 }
-
 a {
 	text-decoration: none;
 	color: black;
@@ -27,10 +32,9 @@ a {
 .red {
 	color: red;
 }
-.blue {
-	color: rgb(47, 0, 255);
+.purple {
+	color: rgb(192, 15, 228);
 }
-
 .green {
 	color: rgb(0, 195, 0);
 }
@@ -38,16 +42,16 @@ a {
 // NORMAL CLASSES
 // ==============
 .adminContainer {
-	@include grid(1fr 4fr, 1.5rem);
+	@include grid(1fr 4fr, 2rem);
 	height: 100vh;
-	background-color: whitesmoke;
 	> aside {
+		@include customScrollbar(none);
+		position: relative;
 		width: 100%;
 		background-color: white;
 		padding: 1rem;
 		z-index: 10;
 		overflow-y: auto;
-		@include customScrollbar(none);
 		> section {
 			margin: 1rem;
 			> h5 {
@@ -68,7 +72,8 @@ a {
 		}
 	}
 }
-
+// REACT TABLE
+// ===========
 .reactTable {
 	border-collapse: collapse;
 	width: 100%;
@@ -92,8 +97,7 @@ a {
 		td {
 			padding: 1rem;
 			img {
-				width: 4rem;
-				height: 4rem;
+				@include square(4rem);
 				object-fit: contain;
 				border-radius: 10px;
 			}
@@ -125,4 +129,52 @@ a {
 			}
 		}
 	}
+}
+// REACT TABLE BACKGROUND PROPERTIES FOR ALL PLACES EXCEPT DASHBOARD WIDGET
+.reactTableBox {
+	@include square(100%);
+	background-color: white;
+	padding: 1rem;
+	padding-bottom: 0;
+	overflow: auto;
+}
+// REACT TABLE PAGINATION
+// ======================
+.tablePagination {
+	@include flex;
+	padding: 2rem;
+	> button {
+		padding: 0.5rem 1rem;
+		border: none;
+		outline: none;
+		border-radius: 10px;
+		cursor: pointer;
+		background-color: rgba(0, 115, 255);
+		color: white;
+		&:disabled {
+			background-color: rgba(0, 115, 255, 0.1);
+			cursor: not-allowed;
+		}
+	}
+}
+#hamburgerButton {
+	@include square(3rem);
+	@include button(none, 0rem, rgb(8, 74, 240), white, whitesmoke, 2rem, 50%);
+	display: grid;
+	place-items: center;
+	position: fixed;
+	top: 1rem;
+	left: 1rem;
+	z-index: 9;
+}
+
+#hamburgerCancel {
+	@include square(3rem);
+	@include button(none, 0rem, rgb(8, 74, 240), white, white, 1.7rem, 50%);
+	display: grid;
+	place-items: center;
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	z-index: 9;
 }

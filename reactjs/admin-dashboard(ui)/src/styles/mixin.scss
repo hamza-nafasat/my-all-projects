@@ -15,14 +15,14 @@
 
 @mixin grid($col: 1fr, $gap: 1rem, $row: unset) {
 	display: grid;
-	gap: $gap;
 	grid-template-columns: $col;
 	grid-template-rows: $row;
+	gap: $gap;
 }
 
-@mixin inputStyle($width: 100%, $pading: 1rem, $bgColor: inherit, $border: none) {
+@mixin inputStyle($width: 100%, $padding: 1rem, $bgColor: inherit, $border: none) {
 	width: $width;
-	padding: $pading;
+	padding: $padding;
 	border: $border;
 	outline: none;
 	background-color: $bgColor;
@@ -38,6 +38,33 @@
 @mixin square($size: 1rem) {
 	height: $size;
 	width: $size;
+}
+@mixin button(
+	$width: 100%,
+	$padding: 1rem,
+	$color: white,
+	$bg: rgb(41, 130, 233),
+	$hbg: rgb(3, 100, 190),
+	$size: 1.1rem,
+	$radius: 5px,
+	$border: none,
+	$outline: none
+) {
+	width: $width;
+	border: $border;
+	padding: $padding;
+	color: $color;
+	border-radius: $radius;
+	font-size: $size;
+	cursor: pointer;
+	background-color: $bg;
+	outline: $outline;
+	&:hover {
+		background-color: $hbg;
+	}
+	&:active {
+		filter: brightness(150%);
+	}
 }
 
 @mixin customScrollbar($d: block, $w: 12px, $h: 12px, $color: #3498db, $bg: #ecf0f5, $hover: #2980b9) {

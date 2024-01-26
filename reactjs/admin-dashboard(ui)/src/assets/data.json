@@ -1,9 +1,9 @@
 {
 	"categories": [
 		{ "value": 40, "heading": "Laptops" },
-		{ "value": 10, "heading": "Shoes" },
-		{ "value": 60, "heading": "Cameras" },
-		{ "value": 30, "heading": "Jeans" }
+		{ "value": 96, "heading": "Shoes" },
+		{ "value": 80, "heading": "Cameras" },
+		{ "value": 60, "heading": "Jeans" }
 	],
 	"transaction": [
 		{

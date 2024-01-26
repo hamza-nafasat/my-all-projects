@@ -1,34 +1,68 @@
-import { Column, TableOptions, useTable } from "react-table";
+import { AiOutlineSortAscending, AiOutlineSortDescending } from "react-icons/ai";
+import { Column, useTable, useSortBy, TableOptions, usePagination } from "react-table";
 
-function WithReactTable<TableDataProps extends object>(
-	columns: Column<TableDataProps>[],
-	data: TableDataProps[],
+function WithReactTable<T extends object>(
+	columns: Column<T>[],
+	data: T[],
+	containerClassName: string,
 	heading: string,
-	tableContainerClassname: string
+	showPagination: boolean = false,
+	pageSize: number = 5
 ) {
 	return function ReactTable() {
-		const tableOption: TableOptions<TableDataProps> = { columns, data };
-		const reactTable = useTable(tableOption);
+		const option: TableOptions<T> = { columns, data, initialState: { pageSize } };
+		const {
+			getTableProps,
+			getTableBodyProps,
+			headerGroups,
+			page,
+			rows,
+			prepareRow,
+			pageCount,
+			state: { pageIndex },
+			nextPage,
+			canNextPage,
+			previousPage,
+			canPreviousPage,
+		} = useTable(option, useSortBy, usePagination);
 		return (
-			<div className={tableContainerClassname}>
-				<h2 className="tableContainerHeading">{heading}</h2>
-				<table className="reactTable" {...reactTable.getTableProps()}>
+			<div className={containerClassName}>
+				<h2 className="heading">{heading}</h2>
+				<table {...getTableProps()} className="reactTable">
 					{/* TABLE HEAD  */}
 					{/* =========== */}
 					<thead>
-						{reactTable.headerGroups.map((headerGroup) => (
+						{headerGroups.map((headerGroup) => (
 							<tr {...headerGroup.getHeaderGroupProps()}>
+								{/* TH OF TABLE  */}
+								{/* ============ */}
 								{headerGroup.headers.map((column) => (
-									<th {...column.getHeaderProps()}>{column.render("Header")}</th>
+									<th {...column.getHeaderProps(column.getSortByToggleProps())}>
+										{column.render("Header")}
+										{/* SORTING ICON  */}
+										{/* ============= */}
+										{column.isSorted ? (
+											<span>
+												{" "}
+												{column.isSortedDesc ? (
+													<AiOutlineSortDescending />
+												) : (
+													<AiOutlineSortAscending />
+												)}
+											</span>
+										) : null}
+									</th>
 								))}
 							</tr>
 						))}
 					</thead>
 					{/* TABLE BODY  */}
 					{/* =========== */}
-					<tbody {...reactTable.getTableBodyProps()}>
-						{reactTable.rows.map((row) => {
-							reactTable.prepareRow(row);
+					<tbody {...getTableBodyProps()}>
+						{/* ROW OR PAGE  */}
+						{/* ============= */}
+						{(showPagination ? page : rows).map((row) => {
+							prepareRow(row);
 							return (
 								<tr {...row.getRowProps()}>
 									{row.cells.map((cell) => (
@@ -39,6 +73,19 @@ function WithReactTable<TableDataProps extends object>(
 						})}
 					</tbody>
 				</table>
+				{/* PAGINATION BUTTON  */}
+				{/* ================== */}
+				{showPagination ? (
+					<div className="tablePagination">
+						<button onClick={previousPage} disabled={!canPreviousPage}>
+							Prev
+						</button>
+						<span>{`${pageIndex + 1} of ${pageCount}`}</span>
+						<button onClick={nextPage} disabled={!canNextPage}>
+							Next
+						</button>
+					</div>
+				) : null}
 			</div>
 		);
 	};

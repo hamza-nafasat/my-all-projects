@@ -1,26 +1,42 @@
 import { Column } from "react-table";
 import WithReactTable from "./subComponents/WithReactTable";
 
-interface TableDataProps {
+interface DashboardTableDataTypes {
 	id: string;
 	quantity: number;
 	discount: number;
 	amount: number;
 	status: string;
 }
-const columns: Column<TableDataProps>[] = [
-	{ Header: "Id", accessor: "id" },
-	{ Header: "Quantity", accessor: "quantity" },
-	{ Header: "Discount", accessor: "discount" },
-	{ Header: "Amount", accessor: "amount" },
-	{ Header: "Status", accessor: "status" },
+const columns: Column<DashboardTableDataTypes>[] = [
+	{
+		Header: "ID",
+		accessor: "id",
+	},
+	{
+		Header: "Quantity",
+		accessor: "quantity",
+	},
+	{
+		Header: "Discount",
+		accessor: "discount",
+	},
+	{
+		Header: "Amount",
+		accessor: "amount",
+	},
+	{
+		Header: "Status",
+		accessor: "status",
+	},
 ];
-const DashboardTable = ({ data = [] }: { data: TableDataProps[] }) => {
-	return WithReactTable<TableDataProps>(
+
+const DashboardTable = ({ tableData = [] }: { tableData: DashboardTableDataTypes[] }) => {
+	return WithReactTable<DashboardTableDataTypes>(
 		columns,
-		data,
-		"Top Transactions",
-		"transactionTableContainer"
+		tableData,
+		"reactTableContainer",
+		"Top Transactions"
 	)();
 };
 

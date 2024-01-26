@@ -5,8 +5,8 @@ import { BiMaleFemale } from "react-icons/bi";
 import AdminAside from "../components/AdminAside";
 import DashboardTable from "../components/DashboardTable";
 import { HiTrendingUp, HiTrendingDown } from "react-icons/hi";
-import { BarChart, DoughnutChart } from "../components/Charts";
 import { getColor } from "../components/subComponents/getColorsForPercentage";
+import { BarChartComponent, DoughnutChartComponent } from "../components/Charts";
 
 const Dashboard = () => {
 	return (
@@ -21,7 +21,7 @@ const Dashboard = () => {
 						type="text"
 						id="adminSearch"
 						name="adminSearch"
-						placeholder="Search about users and docs"
+						placeholder="Search users and docs"
 					/>
 					<FaRegBell />
 					<img src="https://avatars.githubusercontent.com/u/149063128?v=4" alt="user dp" />
@@ -49,14 +49,15 @@ const Dashboard = () => {
 				{/* =========================== */}
 				<article className="graphAndInventoryContainer">
 					<section className="revenueChart">
-						<BarChart
-							heading={"REVENUE & TRANSACTIONS"}
+						<h2>Revenue & Transaction</h2>
+						<BarChartComponent
 							title_1="Revenue"
-							bgColor_1="rgb(0,115,255)"
-							data_1={[300, 144, 433, 655, 237, 755]}
 							title_2="Transactions"
+							data_1={[200, 444, 343, 556, 778, 455, 990]}
+							data_2={[300, 144, 433, 655, 237, 755, 190]}
+							bgColor_1="rgb(0,115,255)"
 							bgColor_2="rgba(52,162,253,0.7)"
-							data_2={[600, 244, 133, 355, 937, 455]}
+							barThickness={0.5}
 						/>
 					</section>
 					<section className="inventoryDetails">
@@ -76,10 +77,10 @@ const Dashboard = () => {
 				<article className="transactionAndGenderChartContainer">
 					<section className="genderChart">
 						<h2>Gender Ratio</h2>
-						<DoughnutChart
+						<DoughnutChartComponent
 							data={[30, 70]}
 							labels={["Male", "Female"]}
-							cutout={90}
+							cutout={"60%"}
 							bgColor={["hsl(340,82%,56%)", "rgba(53,162,235,0.8)"]}
 						/>
 						<p>
@@ -87,8 +88,7 @@ const Dashboard = () => {
 						</p>
 					</section>
 					<section className="transactionTable">
-						{/* <h2>Top Transactions</h2> */}
-						<DashboardTable data={FakeData.transaction} />
+						<DashboardTable tableData={FakeData.transaction} />
 					</section>
 				</article>
 			</main>
@@ -104,7 +104,7 @@ interface WidgetItemProps {
 	heading: string;
 	value: number;
 	percent: number;
-	getColor: Function;
+	getColor: (percent: number) => string;
 	amount?: boolean;
 }
 const WidgetItem = ({ heading, value, percent, getColor, amount = false }: WidgetItemProps) => {
@@ -143,7 +143,7 @@ const WidgetItem = ({ heading, value, percent, getColor, amount = false }: Widge
 interface InventoryItemProps {
 	heading: string;
 	value: number;
-	getColor: Function;
+	getColor: (value: number) => string;
 }
 const InventoryItem = ({ heading, value, getColor }: InventoryItemProps) => {
 	const color = getColor(value);
