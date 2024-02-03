@@ -1,6 +1,6 @@
 import { ChartOptions, ChartData } from "chart.js";
 import { Bar, Doughnut, Line, Pie } from "react-chartjs-2";
-import { getLastYearMonths } from "./getLastYearMonths";
+import { getLastYearMonths } from "../../utils/getLastYearMonths";
 import { BarElement, ArcElement, PointElement, LineElement, Filler } from "chart.js";
 import { Chart as ChartJS, CategoryScale, LinearScale, Title, Tooltip, Legend } from "chart.js";
 

@@ -1,8 +1,8 @@
 import { Column } from "react-table";
 import { FaTrash } from "react-icons/fa";
-import AdminAside from "../components/AdminAside";
+import AdminAside from "../../components/admin/AdminAside";
 import { ReactElement, useCallback, useState } from "react";
-import WithReactTable from "../components/WithReactTable";
+import WithReactTable from "../../components/admin/WithReactTable";
 
 interface CustomersTableDataTypes {
 	avatar: ReactElement;

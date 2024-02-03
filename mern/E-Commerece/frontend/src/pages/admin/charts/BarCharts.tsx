@@ -1,6 +1,6 @@
-import AdminAside from "../../components/AdminAside";
-import { BarChartComponent } from "../../components/Charts";
-import { getLastYearMonths } from "../../components/getLastYearMonths";
+import AdminAside from "../../../components/admin/AdminAside";
+import { BarChartComponent } from "../../../components/admin/Charts";
+import { getLastYearMonths } from "../../../utils/getLastYearMonths";
 
 const BarCharts = () => {
 	return (
