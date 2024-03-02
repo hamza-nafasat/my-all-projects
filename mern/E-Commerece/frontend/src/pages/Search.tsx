@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ProductCard from "../components/ProductCard";
-import { productsDetails } from "./Home";
+import { Products } from "../assets/data.json";
 const Search = () => {
 	const [search, setSearch] = useState<string>("");
 	const [sort, setSort] = useState<string>("");
@@ -69,7 +69,7 @@ const Search = () => {
 				/>
 				{/*  Products  */}
 				<div className="searchProductsList">
-					{productsDetails.map((product) => (
+					{Products.map((product) => (
 						<ProductCard
 							key={product._id}
 							productId={product._id}

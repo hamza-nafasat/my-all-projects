@@ -9,10 +9,10 @@ type ProductsProps = {
 	handler: () => void;
 };
 
-const ProductCard = ({ handler, name, photo, productId, stock, price }: ProductsProps) => {
+const ProductCard = ({ handler, name, photo, price }: ProductsProps) => {
 	return (
 		<div className="productCard">
-			<img src={photo} alt={name} />
+			<img src={photo} alt={name} loading="lazy" />
 			<p>{name}</p>
 			<span>{price} Rs</span>
 			<div>

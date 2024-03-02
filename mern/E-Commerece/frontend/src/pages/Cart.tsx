@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { VscError } from "react-icons/vsc";
 import CartItemCard from "../components/CartItemCard";
 import { Link } from "react-router-dom";
-import { productsDetails } from "./Home";
+import { Products } from "../assets/data.json";
 
 const Subtotal = 4000;
 const tax = Math.round(Subtotal * 0.18);
@@ -26,8 +26,8 @@ const Cart = () => {
 	return (
 		<div className="cartPage">
 			<main>
-				{productsDetails.length > 0 ? (
-					productsDetails.map((item, index) => (
+				{Products.length > 0 ? (
+					Products.map((item, index) => (
 						<CartItemCard
 							key={index}
 							name={item.name}
@@ -69,7 +69,7 @@ const Cart = () => {
 						</span>
 					)
 				) : undefined}
-				{productsDetails.length > 0 ? <Link to={"/shipping"}>Checkout</Link> : undefined}
+				{Products.length > 0 ? <Link to={"/shipping"}>Checkout</Link> : undefined}
 			</aside>
 		</div>
 	);

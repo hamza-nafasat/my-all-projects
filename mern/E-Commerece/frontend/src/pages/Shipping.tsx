@@ -67,7 +67,6 @@ const Shipping = () => {
 					placeholder="Enter Your City"
 					onChange={changeHandler}
 				/>
-
 				<select
 					required
 					id="country"

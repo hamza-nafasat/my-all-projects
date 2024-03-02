@@ -1,8 +1,21 @@
-import express from "express";
-import { createUser } from "../controllers/user.controllers.js";
+import express, { Express } from "express";
+import {
+	createUser,
+	deleteUser,
+	getAllUsers,
+	getSingleUser,
+} from "../controllers/users.controllers.js";
+import { isAdmin } from "../middlewares/auth.js";
 
-const app = express();
+const app: Express = express();
 
+// ADMIN ONLY === get all users
+app.get("/all", isAdmin, getAllUsers);
+
+// register or signup route
 app.post("/new", createUser);
+
+// get one user or delete one user
+app.route("/:_id").get(getSingleUser).delete(deleteUser);
 
 export default app;

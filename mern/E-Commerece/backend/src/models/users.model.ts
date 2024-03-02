@@ -1,20 +1,8 @@
 import mongoose from "mongoose";
 import validator from "validator";
+import { UserSchemaTypes } from "../types/schema.types.js";
 
-interface UserSchema {
-	_id: string;
-	name: string;
-	email: string;
-	dob: Date;
-	photo: string;
-	gender: "male" | "female";
-	role: "admin" | "user";
-	createdAt?: Date;
-	updatedAt?: Date;
-	age: Date;
-}
-
-const userSchema = new mongoose.Schema<UserSchema>(
+const userSchema = new mongoose.Schema<UserSchemaTypes>(
 	{
 		_id: {
 			type: String,
@@ -67,4 +55,5 @@ userSchema.virtual("age").get(function () {
 	return age;
 });
 
-export const User = mongoose.model<UserSchema>("User", userSchema);
+const User = mongoose.model<UserSchemaTypes>("User", userSchema);
+export default User;
