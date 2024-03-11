@@ -52,7 +52,7 @@ export const reduceStock = async (orderItem: OrderSchemaTypes["orderItem"]) => {
 // invalidateNodeCash function which del data from nodeCash
 // ========================================================
 
-export const invalidateNodeCash = async ({
+export const invalidateNodeCash = ({
 	isProducts = false,
 	isOrders = false,
 	isAdmins = false,
@@ -110,8 +110,8 @@ export const updateArraysByMonthDifference = ({
 	totalData?: number[];
 	totalDiscount?: number[];
 }) => {
+	const today = new Date();
 	data.forEach((item) => {
-		const today = new Date();
 		const creationDate = item.createdAt;
 		if (!creationDate) return;
 		const monthDiff = calculateMonthDifference(today, creationDate);
@@ -138,6 +138,7 @@ export const updateArraysByMonthDifference = ({
 		}
 	});
 };
+
 // =================================================================
 // Function to calculate month difference using Date object methods
 // =================================================================

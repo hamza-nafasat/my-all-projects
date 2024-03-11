@@ -10,6 +10,7 @@ import paymentRoutes from "./routes/payment.routes.js";
 import statsRoutes from "./routes/stats.routes.js";
 import productsRoutes from "./routes/products.routes.js";
 import { customErrorMiddleWare } from "./middlewares/errorHandler.js";
+import Stripe from "stripe";
 
 config({
 	path: "./.env",
@@ -18,10 +19,14 @@ config({
 const app = express();
 const port = process.env.PORT || 4000;
 const mongoUrl = process.env.MONGODB_URL || "";
-const dbName = process.env.DB_NAME || "e-commerce";
+const dbName = process.env.DB_NAME || "";
+const stripeKey = process.env.STRIPE_SECRET_KEY || "";
 
 // Node Cashing
 export const nodeCash = new NodeCache();
+
+// Stripe Integration
+export const myStripe = new Stripe(stripeKey);
 
 // Other Middlewares
 app.use(express.json());

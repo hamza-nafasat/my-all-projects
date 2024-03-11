@@ -40,7 +40,7 @@ export const createNewProduct = TryCatch(
 			photo: photo.path,
 		});
 		//// deleting nodeCash data bcz new product created
-		await invalidateNodeCash({ isProducts: true, isAdmins: true });
+		invalidateNodeCash({ isProducts: true, isAdmins: true });
 		//// sending response
 		return responseFunc(res, "Product Created Successfully", 201);
 	}
@@ -128,7 +128,7 @@ export const deleteProduct = TryCatch(async (req, res, next) => {
 	//// deleting image from uploads folder
 	deletePhoto(product.photo);
 	//// deleting nodeCash data bcz one product deleted
-	await invalidateNodeCash({ isProducts: true, isAdmins: true, productId: String(product._id) });
+	invalidateNodeCash({ isProducts: true, isAdmins: true, productId: String(product._id) });
 	//// sending response
 	return responseFunc(res, "Product Deleted Successfully", 200);
 });
@@ -157,7 +157,7 @@ export const updateProduct = TryCatch(async (req, res, next) => {
 	//// now update the product
 	await product.save();
 	//// deleting nodeCash data bcz one product update
-	await invalidateNodeCash({ isProducts: true, isAdmins: true, productId: String(product._id) });
+	invalidateNodeCash({ isProducts: true, isAdmins: true, productId: String(product._id) });
 	//// sending response
 	return responseFunc(res, "Product Updated Successfully", 200);
 });
