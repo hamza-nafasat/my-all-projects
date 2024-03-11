@@ -34,4 +34,9 @@ export interface searchBaseQueryTypes {
 	category?: string;
 }
 
+export interface CouponCodeTypes {
+	couponCode: string;
+	amount: number;
+}
+
 export interface newOrderReqTypes extends OrderSchemaTypes {}

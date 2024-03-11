@@ -1,10 +1,10 @@
+import { Response } from "express";
 import fs from "fs";
 import mongoose from "mongoose";
 import { nodeCash } from "../app.js";
 import Product from "../models/products.model.js";
-import { Response } from "express";
 import { InvalidateNodeCash, ResponseType } from "../types/function.types.js";
-import { OrderSchemaTypes } from "../types/schema.types.js";
+import { OrderSchemaTypes, ProductSchemaTypes } from "../types/schema.types.js";
 
 // =====================
 // delete photo function
@@ -51,17 +51,126 @@ export const reduceStock = async (orderItem: OrderSchemaTypes["orderItem"]) => {
 // ========================================================
 // invalidateNodeCash function which del data from nodeCash
 // ========================================================
-export const invalidateNodeCash = async ({ isProducts, isOrders, isAdmins }: InvalidateNodeCash) => {
+
+export const invalidateNodeCash = async ({
+	isProducts = false,
+	isOrders = false,
+	isAdmins = false,
+	userId = "",
+	orderId = "",
+	productId = "",
+}: InvalidateNodeCash) => {
+	const cacheKeys = [];
 	if (isProducts) {
-		let productsKeys = ["latest_products", "categories", "admin_products"];
-		const productsId = await Product.find().select("_id");
-		productsId.forEach((item) => {
-			productsKeys.push(`product_${item._id}`);
-		});
-		nodeCash.del(productsKeys);
+		cacheKeys.push("latest-products", "categories", "admin-products");
+		if (productId) {
+			if (typeof productId === "string") {
+				cacheKeys.push(`product-${productId}`);
+			} else if (Array.isArray(productId)) {
+				cacheKeys.push(...productId.map((id) => `product-${id}`));
+			}
+		}
 	}
 	if (isOrders) {
+		cacheKeys.push("all-orders");
+		if (userId) cacheKeys.push(`my-orders-${userId}`);
+		if (orderId) cacheKeys.push(`order-${orderId}`);
 	}
 	if (isAdmins) {
+		cacheKeys.push("admin-stats", "admin-bar-charts", "admin-line-charts", "admin-pie-charts");
 	}
+	if (cacheKeys.length > 0) {
+		nodeCash.del(cacheKeys);
+	}
+};
+// ===========================================================
+// Calculate percentage according last month and current month
+// ===========================================================
+
+export const calculatePercentage = (current: number, last: number) => {
+	let percentage;
+	if (last === 0) {
+		percentage = current * 100;
+	} else {
+		percentage = (current / last) * 100;
+	}
+	return Number(percentage.toFixed(2));
+};
+// ====================================================
+// adding data count in arr according every month count
+// ====================================================
+export const updateArraysByMonthDifference = ({
+	data,
+	countData,
+	totalData,
+	totalDiscount,
+}: {
+	data: any[];
+	countData?: number[];
+	totalData?: number[];
+	totalDiscount?: number[];
+}) => {
+	data.forEach((item) => {
+		const today = new Date();
+		const creationDate = item.createdAt;
+		if (!creationDate) return;
+		const monthDiff = calculateMonthDifference(today, creationDate);
+		if (
+			(totalData && totalData?.length == 6) ||
+			(countData && countData?.length == 6) ||
+			(totalDiscount && totalDiscount?.length == 6)
+		) {
+			if (monthDiff < 6) {
+				if (countData) countData[5 - monthDiff] += 1;
+				if (totalData) totalData[5 - monthDiff] += item.total || 0;
+				if (totalDiscount) totalDiscount[5 - monthDiff] += item.discount || 0;
+			}
+		} else if (
+			(totalData && totalData?.length == 12) ||
+			(countData && countData?.length == 12) ||
+			(totalDiscount && totalDiscount?.length == 12)
+		) {
+			if (monthDiff < 12) {
+				if (countData) countData[11 - monthDiff] += 1;
+				if (totalData) totalData[11 - monthDiff] += item.total || 0;
+				if (totalDiscount) totalDiscount[11 - monthDiff] += item.discount || 0;
+			}
+		}
+	});
+};
+// =================================================================
+// Function to calculate month difference using Date object methods
+// =================================================================
+
+export function calculateMonthDifference(today: Date, creationDate: Date) {
+	let monthDiff = today.getMonth() - creationDate.getMonth();
+	let yearDiff = today.getFullYear() - creationDate.getFullYear();
+	if (monthDiff < 0) {
+		monthDiff += 12;
+		yearDiff--;
+	}
+	return monthDiff + yearDiff * 12;
+}
+// ==================================================================================
+// Function to getting Product Categories and find the percentage for every category
+// ==================================================================================
+
+export const categoriesPercentageFunc = async ({
+	allProductsCategories,
+	productsCount,
+}: {
+	allProductsCategories: string[];
+	productsCount: number;
+}) => {
+	let productsCategoryPercentage: Record<string, number> = {};
+	const allCategoriesCountPromiseArr = allProductsCategories.map((category) => {
+		return Product.countDocuments({ category });
+	});
+	const allProductsCategoryCounts = await Promise.all(allCategoriesCountPromiseArr);
+	allProductsCategories.forEach((category, i) => {
+		productsCategoryPercentage[category] = Math.round(
+			(allProductsCategoryCounts[i] / productsCount) * 100
+		);
+	});
+	return productsCategoryPercentage;
 };

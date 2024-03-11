@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { ObjectId } from "mongoose";
 
 export type ApiFuncType = (
 	req: Request,
@@ -16,4 +17,7 @@ export interface InvalidateNodeCash {
 	isProducts?: boolean;
 	isOrders?: boolean;
 	isAdmins?: boolean;
+	userId?: string;
+	orderId?: string;
+	productId?: string | string[];
 }

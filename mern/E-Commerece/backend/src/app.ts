@@ -3,9 +3,11 @@ import express from "express";
 import { config } from "dotenv";
 import NodeCache from "node-cache";
 import { Request, Response } from "express";
-import { connectDB } from "./utils/features.js";
+import { calculateMonthDifference, connectDB } from "./utils/features.js";
 import usersRoutes from "./routes/users.routes.js";
 import orderRoutes from "./routes/orders.routes.js";
+import paymentRoutes from "./routes/payment.routes.js";
+import statsRoutes from "./routes/stats.routes.js";
 import productsRoutes from "./routes/products.routes.js";
 import { customErrorMiddleWare } from "./middlewares/errorHandler.js";
 
@@ -29,6 +31,9 @@ app.use(morgan("dev"));
 app.use("/api/v1/users", usersRoutes);
 app.use("/api/v1/products", productsRoutes);
 app.use("/api/v1/orders", orderRoutes);
+app.use("/api/v1/payments", paymentRoutes);
+app.use("/api/v1/admin", statsRoutes);
+
 app.get("/", (req: Request, res: Response) => {
 	res.send(`App is running on <a href={${process.env.FRONTEND_ULR}}>Frontend url</a>`);
 });

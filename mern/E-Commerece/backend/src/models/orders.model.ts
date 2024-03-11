@@ -1,4 +1,4 @@
-import mongoose, { Schema, mongo } from "mongoose";
+import { Schema, Types, model } from "mongoose";
 import { OrderSchemaTypes } from "../types/schema.types.js";
 
 const singleOrderItem = {
@@ -7,12 +7,12 @@ const singleOrderItem = {
 	price: Number,
 	Quantity: Number,
 	productId: {
-		type: mongoose.Types.ObjectId,
+		type: Types.ObjectId,
 		ref: "Product",
 	},
 };
 
-const orderSchema = new mongoose.Schema<OrderSchemaTypes>(
+const orderSchema = new Schema<OrderSchemaTypes>(
 	{
 		shippingInfo: {
 			address: {
@@ -37,9 +37,9 @@ const orderSchema = new mongoose.Schema<OrderSchemaTypes>(
 			},
 		},
 		orderItem: [singleOrderItem],
-		user: {
+		userId: {
 			type: String,
-			ref: "user",
+			ref: "User",
 			required: true,
 		},
 		subTotal: {
@@ -64,12 +64,12 @@ const orderSchema = new mongoose.Schema<OrderSchemaTypes>(
 		},
 		status: {
 			type: String,
-			enum: ["Processing", "Delivered", "Shipped"],
-			default: "Processing",
+			enum: ["processing", "delivered", "shipped"],
+			default: "processing",
 		},
 	},
 	{ timestamps: true }
 );
 
-const Order = mongoose.model<OrderSchemaTypes>("Order", orderSchema);
+const Order = model<OrderSchemaTypes>("Order", orderSchema);
 export default Order;

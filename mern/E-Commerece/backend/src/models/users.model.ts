@@ -51,7 +51,6 @@ userSchema.virtual("age").get(function () {
 	if (today.getMonth() < dob.getMonth()) age--;
 	// age according date
 	if (today.getMonth() === dob.getMonth() && today.getDate() < dob.getDate()) age--;
-
 	return age;
 });
 

@@ -22,13 +22,15 @@ export interface ProductSchemaTypes {
 }
 
 export interface OrderSchemaTypes {
-	user: string;
+	userId: string;
 	subTotal: number;
 	tax: number;
 	shippingCharges: number;
 	discount: number;
 	total: number;
 	status: string;
+	createdAt?: Date;
+	updatedAt?: Date;
 	shippingInfo: {
 		address: string;
 		city: string;

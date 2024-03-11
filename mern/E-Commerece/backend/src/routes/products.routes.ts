@@ -29,7 +29,7 @@ app.get("/admin-products", isAdmin, getAdminProducts);
 app.post("/new", isAdmin, singleUpload, createNewProduct);
 
 // ADMIN ONLY === update or delete one product
-app.route("/:_id")
+app.route("/single/:productId")
 	.get(getSingleProduct)
 	.delete(isAdmin, deleteProduct)
 	.put(isAdmin, singleUpload, updateProduct);

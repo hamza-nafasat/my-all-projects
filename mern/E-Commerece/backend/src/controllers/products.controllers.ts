@@ -9,6 +9,7 @@ import {
 	CreateNewProductTypes,
 	searchBaseQueryTypes,
 } from "../types/apis.types.js";
+import { isValidObjectId } from "mongoose";
 
 // =========================================
 // http://localhost:8000/api/v1/products/new = CREATE NEW PRODUCT
@@ -39,7 +40,7 @@ export const createNewProduct = TryCatch(
 			photo: photo.path,
 		});
 		//// deleting nodeCash data bcz new product created
-		await invalidateNodeCash({ isProducts: true });
+		await invalidateNodeCash({ isProducts: true, isAdmins: true });
 		//// sending response
 		return responseFunc(res, "Product Created Successfully", 201);
 	}
@@ -50,15 +51,15 @@ export const createNewProduct = TryCatch(
 // ===========================================
 
 export const getLatestProducts = TryCatch(async (req, res, next) => {
+	const nodeCashKey = "latest-products";
 	let products;
 	//// fetching and cashing data in nodeCash
-	if (nodeCash.has("latest_products")) {
-		products = JSON.parse(nodeCash.get("latest_products") as string);
-		console.log("showing : cashed  data");
+	if (nodeCash.has(nodeCashKey)) {
+		products = JSON.parse(nodeCash.get(nodeCashKey) as string);
 	} else {
 		products = await Product.find().sort({ createdAt: -1 }).limit(5);
-		nodeCash.set("latest_products", JSON.stringify(products));
-		console.log("showing and storing in cash : fetched data");
+		if (!products) return next(new CustomError("Products Not Found", 404));
+		nodeCash.set(nodeCashKey, JSON.stringify(products));
 	}
 	return responseFunc(res, "Products Received successfully", 200, products);
 });
@@ -69,14 +70,14 @@ export const getLatestProducts = TryCatch(async (req, res, next) => {
 
 export const getCategories = TryCatch(async (req, res, next) => {
 	let categories;
+	const nodeCashKey = "categories";
 	//// fetching and cashing data in nodeCash
-	if (nodeCash.has("categories")) {
-		categories = JSON.parse(nodeCash.get("categories") as string);
-		console.log("showing : cashed  data");
+	if (nodeCash.has(nodeCashKey)) {
+		categories = JSON.parse(nodeCash.get(nodeCashKey) as string);
 	} else {
 		categories = await Product.distinct("category");
-		nodeCash.set("categories", JSON.stringify(categories));
-		console.log("showing and storing in cash : fetched data");
+		if (!categories) return next(new CustomError("Categories Not Found", 404));
+		nodeCash.set(nodeCashKey, JSON.stringify(categories));
 	}
 	return responseFunc(res, "Categories Received", 200, categories);
 });
@@ -86,35 +87,33 @@ export const getCategories = TryCatch(async (req, res, next) => {
 // ===================================================
 
 export const getAdminProducts = TryCatch(async (req, res, next) => {
+	const nodeCashKey = "admin-products";
 	let products;
 	//// fetching and cashing data in nodeCash
-	if (nodeCash.has("admin_products")) {
-		products = JSON.parse(nodeCash.get("admin_products") as string);
-		console.log("showing cashed : data");
+	if (nodeCash.has(nodeCashKey)) {
+		products = JSON.parse(nodeCash.get(nodeCashKey) as string);
 	} else {
 		products = await Product.find();
-		nodeCash.set("admin_products", JSON.stringify(products));
-		console.log("showing and storing in cash : fetched data");
+		nodeCash.set(nodeCashKey, JSON.stringify(products));
 	}
 	return responseFunc(res, "All Products Received", 200, products);
 });
 
-// =========================================
-// http://localhost:8000/api/v1/products/_id =  GET SINGLE PRODUCT
-// ==========================================
+// ================================================
+// http://localhost:8000/api/v1/products/single/:productId =  GET SINGLE PRODUCT
+// ================================================
 
 export const getSingleProduct = TryCatch(async (req, res, next) => {
-	const { _id } = req.params;
+	const { productId } = req.params;
+	const nodeCashKey = `product-${productId}`;
 	let product;
 	//// fetching and cashing data in nodeCash
-	if (nodeCash.has(`product_${_id}`)) {
-		product = JSON.parse(nodeCash.get(`product_${_id}`) as string);
-		console.log("showing cashed : data");
+	if (nodeCash.has(nodeCashKey)) {
+		product = JSON.parse(nodeCash.get(nodeCashKey) as string);
 	} else {
-		product = await Product.findById(_id);
+		product = await Product.findById(productId);
 		if (!product) return next(new CustomError("Product Not Found", 404));
-		nodeCash.set(`product_${_id}`, JSON.stringify(product));
-		console.log("showing and storing in cash : fetched data");
+		nodeCash.set(nodeCashKey, JSON.stringify(product));
 	}
 	return responseFunc(res, "Product Received Successfully", 200, product);
 });
@@ -122,14 +121,14 @@ export const getSingleProduct = TryCatch(async (req, res, next) => {
 // =========== same route =========== = DELETE SINGLE PRODUCT
 
 export const deleteProduct = TryCatch(async (req, res, next) => {
-	const { _id } = req.params;
-	if (!_id) return next(new CustomError("Please Provide Id", 400));
-	const product = await Product.findByIdAndDelete({ _id });
+	const { productId } = req.params;
+	if (!isValidObjectId(productId)) return next(new CustomError("Invalid Product Id", 400));
+	const product = await Product.findByIdAndDelete({ _id: productId });
 	if (!product) return next(new CustomError("Product Not Found", 404));
 	//// deleting image from uploads folder
 	deletePhoto(product.photo);
 	//// deleting nodeCash data bcz one product deleted
-	await invalidateNodeCash({ isProducts: true });
+	await invalidateNodeCash({ isProducts: true, isAdmins: true, productId: String(product._id) });
 	//// sending response
 	return responseFunc(res, "Product Deleted Successfully", 200);
 });
@@ -137,8 +136,8 @@ export const deleteProduct = TryCatch(async (req, res, next) => {
 // =========== same route =========== = UPDATE SINGLE PRODUCT
 
 export const updateProduct = TryCatch(async (req, res, next) => {
-	const { _id } = req.params;
-	let product = await Product.findById(_id);
+	const { productId } = req.params;
+	let product = await Product.findById(productId);
 	if (!product) return next(new CustomError("Product Not Found", 404));
 	//// if product is available in database then go next
 	const photo = req.file;
@@ -158,7 +157,7 @@ export const updateProduct = TryCatch(async (req, res, next) => {
 	//// now update the product
 	await product.save();
 	//// deleting nodeCash data bcz one product update
-	await invalidateNodeCash({ isProducts: true });
+	await invalidateNodeCash({ isProducts: true, isAdmins: true, productId: String(product._id) });
 	//// sending response
 	return responseFunc(res, "Product Updated Successfully", 200);
 });
