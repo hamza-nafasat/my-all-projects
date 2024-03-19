@@ -1,21 +1,31 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { IoHome } from "react-icons/io5";
 import { FaCartPlus, FaSearch, FaSignInAlt, FaUserTie } from "react-icons/fa";
+import { IoHome } from "react-icons/io5";
+import { Link } from "react-router-dom";
+import { User } from "../types/types";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
+import toast from "react-hot-toast";
 
-const user = {
-	id: "hami",
-	role: "admin",
-};
-
-const Header = () => {
+interface HeaderPropTypes {
+	user: User | null;
+}
+const Header = ({ user }: HeaderPropTypes) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false);
 	const onClose = () => {
 		setIsOpen(false);
 	};
-	const logOutHandler = () => {
-		onClose();
+	const logOutHandler = async () => {
+		try {
+			await signOut(auth);
+			onClose();
+			toast.success("Logout Successfully");
+		} catch (error) {
+			onClose();
+			toast.error("Logout Failed Please Try Again Lated");
+			throw error;
+		}
 	};
 	return (
 		<nav className="header">
@@ -30,7 +40,7 @@ const Header = () => {
 			</Link>
 			{/* IF USER LOGIN */}
 			{/* ============= */}
-			{user?.id ? (
+			{user?._id ? (
 				<>
 					<button title="profile" onClick={() => setIsOpen((prev) => !prev)}>
 						<FaUserTie />
@@ -58,7 +68,7 @@ const Header = () => {
 					{/* IF USER NOT LOGIN */}
 					{/* ================= */}
 					<button onClick={() => setIsRegisterOpen((prev) => !prev)}>
-						<FaSignInAlt color="blue" />
+						<FaSignInAlt />
 					</button>
 					<dialog open={isRegisterOpen}>
 						<div>
@@ -68,13 +78,6 @@ const Header = () => {
 								aria-label="login page"
 							>
 								Login
-							</Link>
-							<Link
-								onClick={() => setIsRegisterOpen(false)}
-								to={"/signup"}
-								aria-label="signup page"
-							>
-								Signup
 							</Link>
 						</div>
 					</dialog>

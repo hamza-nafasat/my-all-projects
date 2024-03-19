@@ -48,7 +48,7 @@
 			display: block;
 		}
 		> .searchProductsList {
-			@include flex(row, space-between, flex-start, 1rem, wrap);
+			@include flex(row, unset, flex-start, 0.1rem, wrap);
 			row-gap: 0.3rem;
 			min-height: 24rem;
 			max-height: calc(100% - 10rem);

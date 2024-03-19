@@ -11,10 +11,13 @@ import statsRoutes from "./routes/stats.routes.js";
 import productsRoutes from "./routes/products.routes.js";
 import { customErrorMiddleWare } from "./middlewares/errorHandler.js";
 import Stripe from "stripe";
+import cors from "cors";
+import { configureCloudinary } from "./utils/cloudinary.js";
 
 config({
 	path: "./.env",
 });
+
 // Constant Variables
 const app = express();
 const port = process.env.PORT || 4000;
@@ -29,6 +32,7 @@ export const nodeCash = new NodeCache();
 export const myStripe = new Stripe(stripeKey);
 
 // Other Middlewares
+app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
@@ -53,6 +57,7 @@ app.use(customErrorMiddleWare);
 // =================================
 (async () => {
 	try {
+		await configureCloudinary();
 		await connectDB(mongoUrl, dbName);
 		//// Server id Listing if database successfully connected
 		app.listen(port, () => console.log(`app listening on ${port}`));

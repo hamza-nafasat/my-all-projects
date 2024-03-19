@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { backendServerUrl } from "../redux/store/store";
 
 type ProductProps = {
 	productId: string;
@@ -14,7 +15,7 @@ const CartItemCard = ({ name, photo, price, productId }: ProductProps) => {
 	const [quantity, setQuantity] = useState<number>(1);
 	return (
 		<div className="cartItem">
-			<img src={photo} alt={name} />
+			<img src={`${backendServerUrl}/${photo}`} alt={name} />
 			<article>
 				<Link to={`/product/${productId}`}>{name}</Link>
 				<span>{price}Rs</span>

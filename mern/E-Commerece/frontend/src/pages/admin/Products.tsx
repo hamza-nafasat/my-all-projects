@@ -1,9 +1,15 @@
-import { Column } from "react-table";
-import { Link } from "react-router-dom";
+import { ReactElement, useCallback, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FaPlus } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { Column } from "react-table";
+import { Skeleton } from "../../components/Loader";
 import AdminAside from "../../components/admin/AdminAside";
-import { ReactElement, useCallback, useState } from "react";
 import WithReactTable from "../../components/admin/WithReactTable";
+import { useAllAdminProductQuery } from "../../redux/api/productApi";
+import { CustomErrorType } from "../../types/api-types";
+import { userReducerInitState } from "../../types/reducer-types";
 
 interface ProductsTableDataTypes {
 	photo: ReactElement;
@@ -34,106 +40,52 @@ const columns: Column<ProductsTableDataTypes>[] = [
 		accessor: "action",
 	},
 ];
-const img =
-	"https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8&w=1000&q=804";
-const img2 = "https://m.media-amazon.com/images/I/514T0SvwkHL._SL1500_.jpg";
-const productsTableDataTypes: ProductsTableDataTypes[] = [
-	{
-		photo: <img src={img} alt="Shoes" />,
-		name: "Puma Shoes",
-		price: 690,
-		stock: 3,
-		action: <Link to="/admin/product/sajknaskd">Manage</Link>,
-	},
-	{
-		photo: <img src={img2} alt="Shoes" />,
-		name: "MacBook",
-		price: 232223,
-		stock: 213,
-		action: <Link to="/admin/product/sdaskdnkasjdn">Manage</Link>,
-	},
-	{
-		photo: <img src={img} alt="Shoes" />,
-		name: "Puma Shoes",
-		price: 690,
-		stock: 3,
-		action: <Link to="/admin/product/sajknaskd">Manage</Link>,
-	},
-	{
-		photo: <img src={img2} alt="Shoes" />,
-		name: "MacBook",
-		price: 232223,
-		stock: 213,
-		action: <Link to="/admin/product/sdaskdnkasjdn">Manage</Link>,
-	},
-	{
-		photo: <img src={img} alt="Shoes" />,
-		name: "Puma Shoes",
-		price: 690,
-		stock: 3,
-		action: <Link to="/admin/product/sajknaskd">Manage</Link>,
-	},
-	{
-		photo: <img src={img2} alt="Shoes" />,
-		name: "MacBook",
-		price: 232223,
-		stock: 213,
-		action: <Link to="/admin/product/sdaskdnkasjdn">Manage</Link>,
-	},
-	{
-		photo: <img src={img} alt="Shoes" />,
-		name: "Puma Shoes",
-		price: 690,
-		stock: 3,
-		action: <Link to="/admin/product/sajknaskd">Manage</Link>,
-	},
-	{
-		photo: <img src={img2} alt="Shoes" />,
-		name: "MacBook",
-		price: 232223,
-		stock: 213,
-		action: <Link to="/admin/product/sdaskdnkasjdn">Manage</Link>,
-	},
-	{
-		photo: <img src={img} alt="Shoes" />,
-		name: "Puma Shoes",
-		price: 690,
-		stock: 3,
-		action: <Link to="/admin/product/sajknaskd">Manage</Link>,
-	},
-	{
-		photo: <img src={img2} alt="Shoes" />,
-		name: "MacBook",
-		price: 232223,
-		stock: 213,
-		action: <Link to="/admin/product/sdaskdnkasjdn">Manage</Link>,
-	},
-	{
-		photo: <img src={img} alt="Shoes" />,
-		name: "Puma Shoes",
-		price: 690,
-		stock: 3,
-		action: <Link to="/admin/product/sajknaskd">Manage</Link>,
-	},
-	{
-		photo: <img src={img2} alt="Shoes" />,
-		name: "MacBook",
-		price: 232223,
-		stock: 213,
-		action: <Link to="/admin/product/sdaskdnkasjdn">Manage</Link>,
-	},
-];
 
 const Products = () => {
-	const [data] = useState<ProductsTableDataTypes[]>(productsTableDataTypes);
+	const { user } = useSelector((state: { userReducer: userReducerInitState }) => state.userReducer);
+	const { data, error, isError, isLoading } = useAllAdminProductQuery(user?._id!);
+	const [tableData, setTableData] = useState<ProductsTableDataTypes[]>([]);
+	// setting data in useEffect
+	useEffect(() => {
+		if (isError) {
+			const err = error as CustomErrorType;
+			toast.error(err.data.message);
+		}
+		if (data) {
+			const dataForTable = data.data.map((product) => ({
+				photo: <img src={product.photo.url} alt={product.name} />,
+				price: product.price,
+				name: product.name,
+				stock: product.stock,
+				action: <Link to={`admin/product/${product._id}`}>Manage</Link>,
+			}));
+			setTableData(dataForTable);
+		}
+	}, [data, isError, error]);
+	// use call back hook for memoization
 	const table = useCallback(
-		WithReactTable<ProductsTableDataTypes>(columns, data, "reactTableBox", "Products", true),
-		[]
+		() =>
+			WithReactTable<ProductsTableDataTypes>(
+				columns,
+				tableData,
+				"reactTableBox",
+				"Products",
+				true
+			),
+		[tableData, columns]
 	);
+	// calling this and make a react component and return
+	const TableComponent = table();
 	return (
 		<div className="adminContainer">
 			<AdminAside />
-			<main style={{ overflowY: "auto" }}>{table()}</main>
+			{isLoading ? (
+				<Skeleton length={8} height="10vh" />
+			) : (
+				<main style={{ overflowY: "auto" }}>
+					<TableComponent />
+				</main>
+			)}
 			<Link to={"/admin/product/new"} className="createProductButton">
 				<FaPlus />
 			</Link>

@@ -16,6 +16,6 @@ app.get("/all", isAdmin, getAllUsers);
 app.post("/new", createUser);
 
 // get one user or delete one user
-app.route("/:_id").get(getSingleUser).delete(deleteUser);
+app.route("/one/:_id").get(getSingleUser).delete(deleteUser);
 
 export default app;

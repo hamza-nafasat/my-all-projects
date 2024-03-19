@@ -14,10 +14,13 @@ export const createUser = TryCatch(
 		const { name, email, dob, photo, gender, _id } = req.body;
 		// //if user already exist then just logged in the user
 		let user = await User.findById(_id);
-		if (user) return responseFunc(res, `Welcome sir ${user.name}`, 200);
+		if (user) return responseFunc(res, `Welcome ${user.name}`, 200);
 		//// if user not exist then first create the user and logged in
+		if (!dob || !gender) {
+			return next(new CustomError("In Firs Login DOB and Gender are Required", 400));
+		}
 		if (!name || !email || !dob || !photo || !gender || !_id) {
-			return next(new CustomError("Please Enter All Fields", 400));
+			return next(new CustomError("As a New User Enter All Fields", 400));
 		}
 		user = await User.create({ name, email, dob, photo, gender, _id });
 		invalidateNodeCash({ isAdmins: true });
@@ -31,18 +34,18 @@ export const createUser = TryCatch(
 
 export const getAllUsers = TryCatch(async (req, res, next) => {
 	const users = await User.find();
-	return responseFunc(res, "Users Received", 200, users);
+	return responseFunc(res, "", 200, users);
 });
 
 // ======================================
-// http://localhost:8000/api/v1/users/_id = GET SINGLE USER
+// http://localhost:8000/api/v1/users/one/_id = GET SINGLE USER
 // ======================================
 
 export const getSingleUser = TryCatch(async (req, res, next) => {
 	const { _id } = req.params;
 	const user = await User.findById(_id);
 	if (!user) return next(new CustomError("User Not Found", 404));
-	return responseFunc(res, "User Received", 200, user);
+	return responseFunc(res, "", 200, user);
 });
 // =============== SAME ================= = DELETE USER
 export const deleteUser = TryCatch(async (req, res, next) => {

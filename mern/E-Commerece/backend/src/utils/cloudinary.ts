@@ -14,27 +14,30 @@ export const configureCloudinary = async () => {
 };
 // UPLOAD FILE ON CLOUDINARY
 // =========================
-export const uploadOnCloudinary = async (fileName, type) => {
+// Function to upload a file to Cloudinary
+export const uploadOnCloudinary = async (fileName: string, subFolder: string) => {
 	try {
 		const response = await cloudinary.v2.uploader.upload(fileName, {
-			resource_type: type,
+			resource_type: "image",
+			folder: `mern-e-commerce/${subFolder}`,
 		});
-		console.log(`${type} uploaded successfully on cloudinary`);
+		console.log(`Image uploaded successfully on cloudinary`);
 		return response;
 	} catch (error) {
 		console.error("Error occurred while uploading file on Cloudinary", error);
 		return null;
 	}
 };
+
 // REMOVE FILE FROM CLOUDINARY
 // ===========================
-export const removeFromCloudinary = async (fileName, type) => {
+export const removeFromCloudinary = async (fileName: string) => {
 	try {
-		const responce = await cloudinary.v2.uploader.destroy(fileName, {
-			resource_type: type,
+		const response = await cloudinary.v2.uploader.destroy(fileName, {
+			resource_type: "image",
 		});
-		console.log(`${type} deleted successfully from cloudinary`);
-		return responce;
+		console.log(`Image deleted successfully from cloudinary`);
+		return response;
 	} catch (error) {
 		console.error("Error occurred while removing file from Cloudinary", error);
 		return null;
